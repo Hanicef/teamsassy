@@ -1,0 +1,186 @@
+Jon Kristensen 2017-11-24 Agila Metoder 
+
+Sprint och Sprint Backlog
+
+	Sprint
+
+		En iteration i Scrum.
+
+		Är mellan 1-4 veckor i länd 
+
+		En Sprint resulterar i en iteration av produkten ( typiskt sett fungerade programvara) som kan demonstreras för kunden, avnändare och andra som är intresserade.
+
+
+	Sprint Backlog
+
+		Innehåller de arbetsobjekt som skall genomföras under en sprint (nästa iteration)
+
+		De arbetsobjekt som ingår kommer från product backlog arbetsobjeckten och väljs ut av teamet under ett planeringsmöte.
+
+		Teamet jobbar självstängdigt och ostört på de arbetsobjekten som väljs ut för att leverera någonting som går att visa upp på review
+
+
+Övning Sprint Backlog
+
+	Välj en eller flera user stories att förverkliga under de första sprinten. Bryt ner dessa arbertsprodukuter till mindre och konkreta uppgifter som tar mellan 1-4 timmar att genomföra. 
+
+	Ni kan också ha andra nödvändiga uppgifter som behövs - tex kofiguration av programvaror och eller liknande. Anpassa vilka user stories som genomförs och i vilken utsträckning så att resultatet är "meningsfullt".
+
+	Halvtid under två veckor, från och med imorgon. blir ungefär 36 n timmar?, där n är antalet personer i gruppen - vi är 6 personer så 36 gånger 6 timmar. vilket returnerar 216 timmar. Om 25% läggs på agila metoder-studier så kvarstår 162 timmar.
+
+
+Rättelse
+
+	24 timmar per person under 2 veckor = 144 timmar totalt.
+
+	Vi väljer user story#1
+
+	w	3 timmar allokeras till Uppgift:Skapa Kortlek (med tillhörande klasser). Class: Deck, Class: Card, Enum: Suites,
+
+	w	Score klass - metod som vi kan använda för andra spel (statisk klass, ej instansierad).
+
+	w 	Videopoker klass,
+
+	w 	vi behöver definera vilka metoder vi behöver för våra klasser.
+
+
+	Hur spelet går tillväga: 
+
+	Datorn shufflar korten
+
+	Datorn tilldelar Användaren 5 kort.
+
+	Användaren får välja mellan att göra byte eller gå vidare till presentation (Syna tror jag)
+
+		Om byte, hur många kort som ska slängas och fås av deck.
+
+	Efter att spelet har avslutats så får användaren välja om den vill avsluta programmet (exit) eller spela igen (reset).
+
+
+## Nu ska vi tilldela klasser i vår speltillvägagång. Okej...
+
+Card som innehåller informationen om kort. 
+
+(Enum:Suite som kopplas till card.)
+
+Deck klassen innehåller metoderna Draw, Shuffle, Reset.
+
+Score klass som vi kan använda till att beräkna poäng för fler spel än just bara videopoker.
+
+Hand klass är tilldelade kort.
+
+Videopoker klass, innehåller Start (Man får 5 kort och den callar Reset i Deck), Byta Kort.
+
+(Graphical User Interface) GUI, interface klass.
+
+User story punkt 1
+3 timmar Card, Deck, Enum:Suite tidsallokering klasserna.
+
+5-6 timmar tidsallokering för Score klassen. - blir en metod i videopokerklassen istället.
+
+2 timmars tidsallokering för Hand klassen.
+
+5-6 timmars tidsallokering för Videopoker klassen.
+
+5-6 timmars tidsallokering för GUI interface klassen.
+
+= 23h
+
+8h * 6 = 48 för presentation
+2h * 6 = 12 scrum möten
+2h * 6 = 12 complications
+
+= 95h
+
+User story punkt 2
+4h en klass för att satsa pengar
+
+User story punkt 3
+4h skapa en klass för att kunna spara tillgångar för att kunna forstätta senare.
+
+= 103h
+
+2h * 6 = 12 complications
+
+= 115h
+
+Vem gör vad?
+Joella - Deck, card enum
+Gustaf - Videopoker
+Sia - Hand
+Sebastian - GUI
+Robin - Score
+Henning - Score
+
+
+Nästa möte Team Sassy Måndag 27/11
+
+Jag (Sia) ska leta upp webbapplikationen som man kan parprogrammera på remote. Leo hade en sådan sida, kolla upp vad den heter.
+
+Scrum
+
+		Daily standup
+
+			1.Vad har du gjort sedan sist?
+			2. Vad kommer du att arbeta med till nästa gång?
+			3. Har du upplevt några problem? 
+
+	Översikt
+
+		Backlog är en lista på vad som behöver göras.
+
+		User stories blir product backlog.
+
+		Sprint Backlog (power point, mockup?)
+
+		Sprint (30 dagar (24 timmar)).
+
+		Working Incriment of the software.
+
+		Skriv en loggbok löpande. 
+
+
+Product owner och Scrum-master
+
+	Product owner
+
+		En person som har en vision om vad som skall skapas eller utföras.
+
+		Spenderar ungefär hälften av tiden med kunden och resten med att prioritera och träffa teamet.
+
+		Personen balanserar värde, risk, och vad som är en bra idé (eller möjligt) att göra och hjälper på så sätt att översätta teamets produktivitet till värde.
+
+		Fokuserar på vad och varför
+
+		Får inte bestämma hur teamet löser problemet.
+
+	Scrum-Master
+
+		Arbetar för att ta bort hinder för teamet, och hjälpa teamet att jobba mer effektivt.
+
+		Till skillnad från en Product Owner så är en Scrum-master en del av teamet.
+
+		Problemet som en ScrumMaster löser är oftast inte av teknisk natur.
+
+		Fokuserar på hur,
+
+			teamet ska jobba, hur processen kan förbättras.
+
+			Har ingen bestämmanderätt.
+
+
+Sammanfattning
+
+	Product Backlog är kandidater för vad produkten ska göra
+
+	Sprint är namnet på en iteration i Scrum.
+
+	Sprint backlog är de uppgifter vi gör i nästa psrint.
+
+	Tidsuppskattningar är svåra; planning poker kan hjälpa.
+
+	Product Owner är länken mellan kunden och teamet.
+
+	Scrum Master hjälper teamet att bli mer effektivt.
+
+	Det finns läsmaterial som Essential Scrum av Kenneth S.Rubin bland annat. 
