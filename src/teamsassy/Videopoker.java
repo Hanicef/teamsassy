@@ -2,44 +2,59 @@
 package teamsassy;
 
 public class Videopoker {
-   private Deck deck;
-   private Hand[] hands;
-   private int player;
+	private Deck deck;
+	private Hand[] hands;
+	private int player;
 
-   public Videopoker(int playercnt) {
-      hands = new Hand[playercnt];
-      deck = new Deck();
+	public Videopoker(int playercnt) {
+		hands = new Hand[playercnt];
+		deck = new Deck();
 
-      for (Object hand : hands) {
-         hand = new Hand();
-      }
+		for (Object hand : hands) {
+			hand = new Hand();
+		}
 
-      player = 0;
-   }
+		player = 0;
+	}
 
-   private void hold() {
-      player++;
-      
-      // TODO: Handle dealer.
-   }
+	private void hold() {
+		player++;
 
-   public void start() {
-      // TODO: Implement start method.
-   }
+		// TODO: Handle dealer.
+	}
 
-   public void swapCards(boolean[] cardMask) {
-      for (int i = 0; i < 5; ++i) {
-         if (cardMask[ı]) {
-            hands[player].cards[i] = deck.drawCard();
-         }
-      }
-   }
+	public void start() {
+		// TODO: Implement start method.
+	}
 
-   public Hand getHand(int index) {
-      return hands[index];
-   }
+	public void swapCards(boolean[] cardMask) {
+		for (int i = 0; i < 5; ++i) {
+			if (cardMask[ı]) {
+				hands[player].cards[i] = deck.drawCard();
+			}
+		}
+	}
 
-   public int score(Hand hand) {
-      // TODO: Implement score method.
-   }
+	public Hand getHand(int index) {
+		return hands[index];
+	}
+
+	public int score(Hand hand) {
+		int score;
+		for (int i = 0; i < 5; i++) {
+
+			if (hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue) {
+				score = 1;
+			}
+			if(hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue) {
+				for(int j = i;i < 4; i++) {
+					if(hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue) {
+						
+					}
+					
+				}
+			}
+		}
+
+	}
 }
