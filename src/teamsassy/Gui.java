@@ -34,11 +34,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	private JPanel checkboxPanel = new JPanel();
 
-	private JCheckBox c1 = new JCheckBox();
-	private JCheckBox c2 = new JCheckBox();
-	private JCheckBox c3 = new JCheckBox();
-	private JCheckBox c4 = new JCheckBox();
-	private JCheckBox c5 = new JCheckBox();
+	private JCheckBox[] c = new JCheckBox[5];
 
 	private JPanel textMessagePanel = new JPanel();
 	private static JTextArea textArea = new JTextArea(3, 35);
@@ -52,7 +48,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JLabel card5 = new JLabel();
 
 	private ImageIcon back = new ImageIcon("src/images/back.png");
-	
+
 	private ImageIcon spadesAce = new ImageIcon("src/images/ace_of_spades.png");
 	private ImageIcon spades2 = new ImageIcon("src/images/2_of_spades.png");
 	private ImageIcon spades3 = new ImageIcon("src/images/3_of_spades.png");
@@ -66,7 +62,7 @@ public class Gui extends JFrame implements ActionListener {
 	private ImageIcon spadesKnight = new ImageIcon("src/images/knight_of_spades.png");
 	private ImageIcon spadesQueen = new ImageIcon("src/images/queen_of_spades.png");
 	private ImageIcon spadesKing = new ImageIcon("src/images/king_of_spades.png");
-	
+
 	private ImageIcon clubsAce = new ImageIcon("src/images/ace_of_clubs.png");
 	private ImageIcon clubs2 = new ImageIcon("src/images/2_of_clubs.png");
 	private ImageIcon clubs3 = new ImageIcon("src/images/3_of_clubs.png");
@@ -80,7 +76,7 @@ public class Gui extends JFrame implements ActionListener {
 	private ImageIcon clubsKnight = new ImageIcon("src/images/knight_of_clubs.png");
 	private ImageIcon clubsQueen = new ImageIcon("src/images/queen_of_clubs.png");
 	private ImageIcon clubsKing = new ImageIcon("src/images/king_of_clubs.png");
-	
+
 	private ImageIcon diamondsAce = new ImageIcon("src/images/ace_of_diamonds.png");
 	private ImageIcon diamonds2 = new ImageIcon("src/images/2_of_diamonds.png");
 	private ImageIcon diamonds3 = new ImageIcon("src/images/3_of_diamonds.png");
@@ -94,7 +90,7 @@ public class Gui extends JFrame implements ActionListener {
 	private ImageIcon diamondsKnight = new ImageIcon("src/images/knight_of_diamonds.png");
 	private ImageIcon diamondsQueen = new ImageIcon("src/images/queen_of_diamonds.png");
 	private ImageIcon diamondsKing = new ImageIcon("src/images/king_of_diamonds.png");
-	
+
 	private ImageIcon heartsAce = new ImageIcon("src/images/ace_of_hearts.png");
 	private ImageIcon hearts2 = new ImageIcon("src/images/2_of_hearts.png");
 	private ImageIcon hearts3 = new ImageIcon("src/images/3_of_hearts.png");
@@ -108,22 +104,25 @@ public class Gui extends JFrame implements ActionListener {
 	private ImageIcon heartsKnight = new ImageIcon("src/images/knight_of_hearts.png");
 	private ImageIcon heartsQueen = new ImageIcon("src/images/queen_of_hearts.png");
 	private ImageIcon heartsKing = new ImageIcon("src/images/ace_of_king.png");
-	
+
 	public Gui() {
 		super("VideoPoker");
-		
-		//Ställa in och adda knapparna
+
+		// Ställa in och adda knapparna
 		Font buttonFont = new Font("Helvetica", Font.BOLD, 24);
 		Dimension buttonDim = new Dimension(120, 55);
 		start.setFont(buttonFont);
 		start.setPreferredSize(buttonDim);
 		start.addActionListener(this);
+		start.setEnabled(true);
 		swap.setFont(buttonFont);
 		swap.setPreferredSize(buttonDim);
 		swap.addActionListener(this);
+		swap.setEnabled(false);
 		hold.setFont(buttonFont);
 		hold.setPreferredSize(buttonDim);
 		hold.addActionListener(this);
+		hold.setEnabled(false);
 		buttonPanel.setLayout(new GridBagLayout());
 		GridBagConstraints buttonPanelGBC = new GridBagConstraints();
 		buttonPanelGBC.insets = new Insets(0, 15, 0, 15);
@@ -144,40 +143,32 @@ public class Gui extends JFrame implements ActionListener {
 		radio1.addActionListener(this);
 		radio2.addActionListener(this);
 
-		//Ställa in och adda checkboxes
+		// Ställa in och adda checkboxes
 		checkboxPanel.setLayout(new GridBagLayout());
 		GridBagConstraints checkboxPanelGBC = new GridBagConstraints();
 		checkboxPanelGBC.insets = new Insets(0, 40, 0, 40);
-		checkboxPanelGBC.gridx = 1;
-		checkboxPanel.add(c1, checkboxPanelGBC);
-		checkboxPanelGBC.gridx = 2;
-		checkboxPanel.add(c2, checkboxPanelGBC);
-		checkboxPanelGBC.gridx = 3;
-		checkboxPanel.add(c3, checkboxPanelGBC);
-		checkboxPanelGBC.gridx = 4;
-		checkboxPanel.add(c4, checkboxPanelGBC);
-		checkboxPanelGBC.gridx = 5;
-		checkboxPanel.add(c5, checkboxPanelGBC);
-		c1.addActionListener(this);
-		c2.addActionListener(this);
-		c3.addActionListener(this);
-		c4.addActionListener(this);
-		c5.addActionListener(this);
+		c = new JCheckBox[5];
+		for (int i = 0; i < c.length; ++i) {
+			c[i] = new JCheckBox();
+			checkboxPanelGBC.gridx = i+1;
+			checkboxPanel.add(c[i], checkboxPanelGBC);
+			c[i].addActionListener(this);
+		}
 
-		//Lägg till textArea
+		// Lägg till textArea
 		textArea.setOpaque(false);
 		textArea.setFont(new Font("Helvetica", Font.BOLD, 18));
 		textArea.setText("Du fick kåk, 1000 poäng till dig!");
 		textMessagePanel.add(textArea);
 
-		//Ställa in korten
-		card1.setIcon(spadesAce);
-		card2.setIcon(diamondsQueen);
-		card3.setIcon(clubs9);
-		card4.setIcon(spadesKnight);
-		card5.setIcon(hearts10	);
-		
-		//Lägga till korten i kortpanelen
+		// Ställa in korten
+		card1.setIcon(back);
+		card2.setIcon(back);
+		card3.setIcon(back);
+		card4.setIcon(back);
+		card5.setIcon(back);
+
+		// Adda korten i kortpanelen
 		cardPanel.setLayout(new GridBagLayout());
 		GridBagConstraints cardPanelGBC = new GridBagConstraints();
 		cardPanelGBC.insets = new Insets(5, 5, 5, 5);
@@ -195,102 +186,97 @@ public class Gui extends JFrame implements ActionListener {
 		GridBagConstraints frameGBC = new GridBagConstraints();
 
 		frameGBC.insets = new Insets(10, 0, 10, 0);
-		//Adda till text i framen
+		// Adda text i framen
 		frameGBC.gridx = 1;
 		frameGBC.gridy = 1;
 		frameGBC.gridwidth = 5;
 		frameGBC.gridheight = 1;
 		add(textArea, frameGBC);
-		//Adda till cardPanel i framen
+		// Adda cardPanel i framen
 		frameGBC.gridx = 1;
 		frameGBC.gridy = 2;
 		frameGBC.gridwidth = 5;
 		frameGBC.gridheight = 3;
 		add(cardPanel, frameGBC);
-		//Adda till checkboxPanel i framen
+		// Adda checkboxPanel i framen
 		frameGBC.gridx = 1;
 		frameGBC.gridy = 6;
 		frameGBC.gridwidth = 5;
 		frameGBC.gridheight = 1;
 		add(checkboxPanel, frameGBC);
-		//Adda till buttonPanel i framen
+		// Adda  buttonPanel i framen
 		frameGBC.gridx = 1;
 		frameGBC.gridy = 7;
 		frameGBC.gridwidth = 5;
 		frameGBC.gridheight = 1;
 		add(buttonPanel, frameGBC);
-		
-		//inställningar för Framen	
-		//getContentPane().setBackground(Color.DARK_GRAY);
+
+		// inställningar för Framen
+		// getContentPane().setBackground(Color.DARK_GRAY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}
 
-	//Actionlistener
+	// Actionlistener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == start) {
-			// lägg in anrop till startmetoden här
+			//TODO: lägg in anrop till startmetoden här
 			textArea.setText("START");
+			start.setEnabled(false);
+			swap.setEnabled(true);
+			hold.setEnabled(true);
 		}
 		if (e.getSource() == swap) {
-			// lägg in anrop till swapmetoden här
+			//TODO: lägg in anrop till swapmetoden här
 			textArea.setText("SWAP");
+			resetCheckboxes();
 		}
 		if (e.getSource() == hold) {
-			// lägg in anrop till holdmetoden här
+			//TODO: lägg in anrop till holdmetoden här
 			textArea.setText("HOLD");
+			start.setEnabled(true);
+			swap.setEnabled(false);
+			hold.setEnabled(false);
 		}
-		if (c1.isSelected()) {
-			//Markera kort 1 för byte
+		for (int i = 0; i < 5; ++i) {
+			if (c[i].isSelected()) {
+				// TODO: Mark card i.
+				String s = "c " + i + " is selected";
+				textArea.setText(s);
+			} else {
+				// TODO: Unmark card i.
+			}
 		}
-		if (!c1.isSelected()) {
-			//Avmarkera kort 1 för byte
-		}
-		if (c2.isSelected()) {
-			//Markera kort 2 för byte
-		}
-		if (!c2.isSelected()) {
-			//Avmarkera kort 2 för byte
-		}
-		if (c3.isSelected()) {
-			//Markera kort 3 för byte
-		}
-		if (!c3.isSelected()) {
-			//Avmarkera kort 3 för byte
-		}
-		if (c4.isSelected()) {
-			//Markera kort 4 för byte
-		}
-		if (!c4.isSelected()) {
-			//Avmarkera kort 4 för byte
-		}
-		if (c5.isSelected()) {
-			//Markera kort 5 för byte
-		}
-		if (!c5.isSelected()) {
-			//Avmarkera kort 5för byte
-		}
+		
 		if (radio1.isSelected()) {
-			//väljer att ett kort ska swapas			
+			//TODO: väljer att ett kort ska swapas
 		}
-		if(radio2.isSelected()) {
-			//väljer att två kort ska swapas
+		if (radio2.isSelected()) {
+			//TODO: väljer att två kort ska swapas
 		}
 	}
-	
+
 	public static void setText(String text) {
 		textArea.setText(text);
 	}
-	
-	public static void setIconsForHand(Hand hand) {
-		
-	}
-	
+
+	// public static void setIconsForHand(Hand hand) {
+	//
+	// }
+
 	public static void setIconsForSwap(Card card) {
-		
+
 	}
 
+	private void resetCheckboxes() {
+		for(int i = 0; i < c.length; i++) {
+			if(c[i].isSelected()) {
+				c[i].doClick();
+			}
+		}
+	}
+	
 }
