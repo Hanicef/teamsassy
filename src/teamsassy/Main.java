@@ -11,7 +11,7 @@ public class Main {
 
 			@Override
 			public void run() {
-				GUI gui = new GUI();	
+				Gui gui = new Gui();	
 			}	
 		});
 	}
