@@ -10,9 +10,9 @@ public class Videopoker {
 		hands = new Hand[playercnt];
 		deck = new Deck();
 
-		for (Object hand : hands) {
-			hand = new Hand();
-		}
+      for (int i = 0; i < playercnt; ++i) {
+         hands[i] = new Hand();
+      }
 
 		player = 0;
 	}
@@ -20,12 +20,20 @@ public class Videopoker {
 	private void hold() {
 		player++;
 
-		// TODO: Handle dealer.
-	}
+   public void start() {
+      deck.reset();
+      for (int i = 0; i < hands.length; ++i) {
+         hands[i].clear();
+      }
 
-	public void start() {
-		// TODO: Implement start method.
-	}
+      for (int i = 0; i < hands.length; ++i) {
+         for (int j = 0; j < 5; ++j) {
+            hands[i].addCard(deck.drawCard());
+         }
+      }
+
+      player = 0;
+   }
 
 	public void swapCards(boolean[] cardMask) {
 		for (int i = 0; i < 5; ++i) {
