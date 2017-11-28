@@ -2,18 +2,25 @@
 package teamsassy;
 
 public class Hand {
-   // NOTE: Currently a placeholder; needs implementation!
 
    private Card[] cards;
+   private int cardCount;
+   
+   
+   
 
    public Hand() {
+	   cardCount = 0;
+	   cards = new Card[5];
+	   
    }
 
    public void addCard(Card card) {
+	   cards[cardCount++] = card;
    }
 
    public Card[] getCards() {
-      return null;
+      return cards;
    }
 
    public void clear() {
