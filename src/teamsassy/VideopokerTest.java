@@ -61,7 +61,7 @@ class VideopokerTest {
 		h.addCard(new Card(1, Suit.HEARTS));
 		h.addCard(new Card(1, Suit.HEARTS));
 		
-		assertEquals(7, p.score(h));
+		assertEquals(8, p.score(h));
 		
 	}
 	@Test
@@ -85,7 +85,43 @@ class VideopokerTest {
 		h.addCard(new Card(5, Suit.HEARTS));
 		h.addCard(new Card(3, Suit.HEARTS));
 		
-		assertEquals(10, p.score(h));
+		assertEquals(5, p.score(h));
+		
+	}
+	@Test
+	void testStege() {
+		h.clear();
+		h.addCard(new Card(6, Suit.HEARTS));
+		h.addCard(new Card(2, Suit.SPADES));
+		h.addCard(new Card(3, Suit.HEARTS));
+		h.addCard(new Card(5, Suit.HEARTS));
+		h.addCard(new Card(4, Suit.HEARTS));
+		
+		assertEquals(4, p.score(h));
+		
+	}
+	@Test
+	void testFärgStege() {
+		h.clear();
+		h.addCard(new Card(6, Suit.HEARTS));
+		h.addCard(new Card(2, Suit.HEARTS));
+		h.addCard(new Card(3, Suit.HEARTS));
+		h.addCard(new Card(5, Suit.HEARTS));
+		h.addCard(new Card(4, Suit.HEARTS));
+		
+		assertEquals(11, p.score(h));
+		
+	}
+	@Test
+	void testRoyalStraightFlush() {
+		h.clear();
+		h.addCard(new Card(10, Suit.HEARTS));
+		h.addCard(new Card(11, Suit.HEARTS));
+		h.addCard(new Card(12, Suit.HEARTS));
+		h.addCard(new Card(13, Suit.HEARTS));
+		h.addCard(new Card(1, Suit.HEARTS));
+		
+		assertEquals(20, p.score(h));
 		
 	}
 

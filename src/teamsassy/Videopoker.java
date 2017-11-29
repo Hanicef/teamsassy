@@ -1,6 +1,8 @@
 
 package teamsassy;
 
+import java.util.Arrays;
+
 public class Videopoker {
 	private Deck deck;
 	private Hand[] hands;
@@ -56,22 +58,25 @@ public class Videopoker {
 		int[] values = new int[14];
 		int sameSuit = 0;
 		int s = 0;
-		int sameCard = 0;
 		boolean flush = false;
+		int[] handen = new int[5];
+		Suit[] suits = new Suit[5];
 
 		for (int m = 1; m <= 13; m++) {
 			values[m] = 0;
 		}
 		for (int x = 0; x <= 4; x++) {
+			suits[x] = hand.getCards()[x].getSuit();
+			handen[x] = hand.getCards()[x].getValue();
 			values[hand.getCards()[x].getValue()]++;
-			for (int i = 0; i < 5; i++) {
 
-				if (hand.getCards()[x].getSuit() == hand.getCards()[i].getSuit() && i != x)
-					sameSuit++;
-				if (sameSuit == 5) {
-					flush = true;
-					s = 10;
-				}
+			if (suits[0] == hand.getCards()[x].getSuit())
+				sameSuit++;
+			System.out.println(sameSuit);
+			if (sameSuit == 5) {
+				flush = true;
+				s = 5;
+
 			}
 		}
 		for (int m = 0; m < 13; m++) {
@@ -86,7 +91,7 @@ public class Videopoker {
 			}
 			// fyrtal
 			else if (values[m] == 4) {
-				s = 7;
+				s = 8;
 			}
 			for (int i = 0; i < 13; i++) {
 				// tvåpar
@@ -100,6 +105,21 @@ public class Videopoker {
 				}
 
 			}
+		}
+		Arrays.sort(handen);
+		if (handen[0] == (handen[1] - 1) && (handen[2] - 2) == (handen[3] - 3) && (handen[3] - 3) == (handen[4] - 4)) {
+			s = 4;
+			// Färgstege
+			if (flush == true) {
+				s = 11;
+				System.out.println(handen[0] + " Hej");
+
+			}
+		}
+		// Royal Straight Flush
+		if (handen[0] == 1 && handen[1] == 10 && handen[2] == 11 && handen[3] == 12 && handen[4] == 13
+				&& flush == true) {
+			s = 20;
 		}
 		System.out.println();
 		return s;
