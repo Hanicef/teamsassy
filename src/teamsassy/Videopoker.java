@@ -17,7 +17,7 @@ public class Videopoker {
 		player = 0;
 	}
 
-	private void hold() {
+	public void hold() {
 		player++;
 
 	}
