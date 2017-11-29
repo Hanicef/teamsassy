@@ -1,0 +1,26 @@
+Frågorna att ställa under scrum-möte som varje deltagare svarar på.
+1. Vad har du gjort sen sist?
+2. Vad ska du göra till nästa gång?
+3. Har du haft några hinder?
+
+
+Scrum-möte 2017-11-28
+Gustaf 
+har jobbat på videopokerklassen till det läget att han behöver ha deck och hand klassen för att kunna fortsätta. 
+Innan han har dem kan har inte fortsätta. 
+
+Henning 
+har jobbat på att förstå hur han ska skapa scoremetoden. 
+Hade lite problem att förstå UML-diagramet men det förklarades senare. 
+Till nästa gång ska han ha jobbat vidare på scoremetoden
+
+Sebastian 
+har jobbat på GUI-klassen och har kommit en bra bit på den. 
+Han ska jobba vidare på GUI-klassen till nästa gång 
+och behöver ha en fungerande hand-klass för att få ihop allt.
+
+Joella 
+har skapat enum och card-klassen och även gjort en tidsplan för de olika delarna i projektet samt gjort ett schema för vem som ska var scrum-master.
+Till nästa gång så ska hon göra deck-klassen så klar som möjligt och även fortsätta med scrum-master arbetet.
+
+Nästa scrum-möte 2017-11-29

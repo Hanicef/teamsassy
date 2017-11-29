@@ -21,15 +21,19 @@ import javax.swing.JTextArea;
 
 public class Gui extends JFrame implements ActionListener {
 
-	public int nrOfSwaps = 0;
+	// Skapa massa variabler som behövs
+	public int nrOfSwaps = 1;
+	public int swapCount = 0;
 
 	private JPanel buttonPanel = new JPanel();
 
 	private JButton swap = new JButton("Swap");
 	private JButton start = new JButton("Start");
 	private JButton hold = new JButton("Hold");
-	private JRadioButton radio1 = new JRadioButton("1 swap", true);
-	private JRadioButton radio2 = new JRadioButton("2 swap", false);
+
+	private JRadioButton[] radiobuttons = new JRadioButton[] { new JRadioButton("1 swap", true),
+			new JRadioButton("2 swap", false) };
+
 	private ButtonGroup group = new ButtonGroup();
 
 	private JPanel checkboxPanel = new JPanel();
@@ -41,69 +45,42 @@ public class Gui extends JFrame implements ActionListener {
 
 	private JPanel cardPanel = new JPanel();
 
-	private JLabel card1 = new JLabel();
-	private JLabel card2 = new JLabel();
-	private JLabel card3 = new JLabel();
-	private JLabel card4 = new JLabel();
-	private JLabel card5 = new JLabel();
+	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
+			new JLabel() };
 
 	private ImageIcon back = new ImageIcon("src/images/back.png");
 
-	private ImageIcon spadesAce = new ImageIcon("src/images/ace_of_spades.png");
-	private ImageIcon spades2 = new ImageIcon("src/images/2_of_spades.png");
-	private ImageIcon spades3 = new ImageIcon("src/images/3_of_spades.png");
-	private ImageIcon spades4 = new ImageIcon("src/images/4_of_spades.png");
-	private ImageIcon spades5 = new ImageIcon("src/images/5_of_spades.png");
-	private ImageIcon spades6 = new ImageIcon("src/images/6_of_spades.png");
-	private ImageIcon spades7 = new ImageIcon("src/images/7_of_spades.png");
-	private ImageIcon spades8 = new ImageIcon("src/images/8_of_spades.png");
-	private ImageIcon spades9 = new ImageIcon("src/images/9_of_spades.png");
-	private ImageIcon spades10 = new ImageIcon("src/images/10_of_spades.png");
-	private ImageIcon spadesKnight = new ImageIcon("src/images/knight_of_spades.png");
-	private ImageIcon spadesQueen = new ImageIcon("src/images/queen_of_spades.png");
-	private ImageIcon spadesKing = new ImageIcon("src/images/king_of_spades.png");
+	private static ImageIcon[] spadeCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_spades.png"),
+			new ImageIcon("src/images/2_of_spades.png"), new ImageIcon("src/images/3_of_spades.png"),
+			new ImageIcon("src/images/4_of_spades.png"), new ImageIcon("src/images/5_of_spades.png"),
+			new ImageIcon("src/images/6_of_spades.png"), new ImageIcon("src/images/7_of_spades.png"),
+			new ImageIcon("src/images/8_of_spades.png"), new ImageIcon("src/images/9_of_spades.png"),
+			new ImageIcon("src/images/10_of_spades.png"), new ImageIcon("src/images/knight_of_spades.png"),
+			new ImageIcon("src/images/queen_of_spades.png"), new ImageIcon("src/images/king_of_spades.png") };
 
-	private ImageIcon clubsAce = new ImageIcon("src/images/ace_of_clubs.png");
-	private ImageIcon clubs2 = new ImageIcon("src/images/2_of_clubs.png");
-	private ImageIcon clubs3 = new ImageIcon("src/images/3_of_clubs.png");
-	private ImageIcon clubs4 = new ImageIcon("src/images/4_of_clubs.png");
-	private ImageIcon clubs5 = new ImageIcon("src/images/5_of_clubs.png");
-	private ImageIcon clubs6 = new ImageIcon("src/images/6_of_clubs.png");
-	private ImageIcon clubs7 = new ImageIcon("src/images/7_of_clubs.png");
-	private ImageIcon clubs8 = new ImageIcon("src/images/8_of_clubs.png");
-	private ImageIcon clubs9 = new ImageIcon("src/images/9_of_clubs.png");
-	private ImageIcon clubs10 = new ImageIcon("src/images/10_of_clubs.png");
-	private ImageIcon clubsKnight = new ImageIcon("src/images/knight_of_clubs.png");
-	private ImageIcon clubsQueen = new ImageIcon("src/images/queen_of_clubs.png");
-	private ImageIcon clubsKing = new ImageIcon("src/images/king_of_clubs.png");
+	private ImageIcon[] clubCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_clubs.png"),
+			new ImageIcon("src/images/2_of_clubs.png"), new ImageIcon("src/images/3_of_clubs.png"),
+			new ImageIcon("src/images/4_of_clubs.png"), new ImageIcon("src/images/5_of_clubs.png"),
+			new ImageIcon("src/images/6_of_clubs.png"), new ImageIcon("src/images/7_of_clubs.png"),
+			new ImageIcon("src/images/8_of_clubs.png"), new ImageIcon("src/images/9_of_clubs.png"),
+			new ImageIcon("src/images/10_of_clubs.png"), new ImageIcon("src/images/knight_of_clubs.png"),
+			new ImageIcon("src/images/queen_of_clubs.png"), new ImageIcon("src/images/king_of_clubs.png") };
 
-	private ImageIcon diamondsAce = new ImageIcon("src/images/ace_of_diamonds.png");
-	private ImageIcon diamonds2 = new ImageIcon("src/images/2_of_diamonds.png");
-	private ImageIcon diamonds3 = new ImageIcon("src/images/3_of_diamonds.png");
-	private ImageIcon diamonds4 = new ImageIcon("src/images/4_of_diamonds.png");
-	private ImageIcon diamonds5 = new ImageIcon("src/images/5_of_diamonds.png");
-	private ImageIcon diamonds6 = new ImageIcon("src/images/6_of_diamonds.png");
-	private ImageIcon diamonds7 = new ImageIcon("src/images/7_of_diamonds.png");
-	private ImageIcon diamonds8 = new ImageIcon("src/images/8_of_diamonds.png");
-	private ImageIcon diamonds9 = new ImageIcon("src/images/9_of_diamonds.png");
-	private ImageIcon diamonds10 = new ImageIcon("src/images/10_of_diamonds.png");
-	private ImageIcon diamondsKnight = new ImageIcon("src/images/knight_of_diamonds.png");
-	private ImageIcon diamondsQueen = new ImageIcon("src/images/queen_of_diamonds.png");
-	private ImageIcon diamondsKing = new ImageIcon("src/images/king_of_diamonds.png");
+	private ImageIcon[] diamondCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_diamonds.png"),
+			new ImageIcon("src/images/2_of_diamonds.png"), new ImageIcon("src/images/3_of_diamonds.png"),
+			new ImageIcon("src/images/4_of_diamonds.png"), new ImageIcon("src/images/5_of_diamonds.png"),
+			new ImageIcon("src/images/6_of_diamonds.png"), new ImageIcon("src/images/7_of_diamonds.png"),
+			new ImageIcon("src/images/8_of_diamonds.png"), new ImageIcon("src/images/9_of_diamonds.png"),
+			new ImageIcon("src/images/10_of_diamonds.png"), new ImageIcon("src/images/knight_of_diamonds.png"),
+			new ImageIcon("src/images/queen_of_diamonds.png"), new ImageIcon("src/images/king_of_diamonds.png") };
 
-	private ImageIcon heartsAce = new ImageIcon("src/images/ace_of_hearts.png");
-	private ImageIcon hearts2 = new ImageIcon("src/images/2_of_hearts.png");
-	private ImageIcon hearts3 = new ImageIcon("src/images/3_of_hearts.png");
-	private ImageIcon hearts4 = new ImageIcon("src/images/4_of_hearts.png");
-	private ImageIcon hearts5 = new ImageIcon("src/images/5_of_hearts.png");
-	private ImageIcon hearts6 = new ImageIcon("src/images/6_of_hearts.png");
-	private ImageIcon hearts7 = new ImageIcon("src/images/7_of_hearts.png");
-	private ImageIcon hearts8 = new ImageIcon("src/images/8_of_hearts.png");
-	private ImageIcon hearts9 = new ImageIcon("src/images/9_of_hearts.png");
-	private ImageIcon hearts10 = new ImageIcon("src/images/10_of_hearts.png");
-	private ImageIcon heartsKnight = new ImageIcon("src/images/knight_of_hearts.png");
-	private ImageIcon heartsQueen = new ImageIcon("src/images/queen_of_hearts.png");
-	private ImageIcon heartsKing = new ImageIcon("src/images/ace_of_king.png");
+	private ImageIcon[] heartCard = new ImageIcon[] { new ImageIcon("src/images/ace_of_hearts.png"),
+			new ImageIcon("src/images/2_of_hearts.png"), new ImageIcon("src/images/3_of_hearts.png"),
+			new ImageIcon("src/images/4_of_hearts.png"), new ImageIcon("src/images/5_of_hearts.png"),
+			new ImageIcon("src/images/6_of_hearts.png"), new ImageIcon("src/images/7_of_hearts.png"),
+			new ImageIcon("src/images/8_of_hearts.png"), new ImageIcon("src/images/9_of_hearts.png"),
+			new ImageIcon("src/images/10_of_hearts.png"), new ImageIcon("src/images/knight_of_hearts.png"),
+			new ImageIcon("src/images/queen_of_hearts.png"), new ImageIcon("src/images/ace_of_king.png") };
 
 	public Gui() {
 		super("VideoPoker");
@@ -135,13 +112,13 @@ public class Gui extends JFrame implements ActionListener {
 		buttonPanel.add(hold, buttonPanelGBC);
 		buttonPanelGBC.gridheight = 1;
 		buttonPanelGBC.gridx = 4;
-		buttonPanel.add(radio1, buttonPanelGBC);
+		buttonPanel.add(radiobuttons[0], buttonPanelGBC);
 		buttonPanelGBC.gridy = 1;
-		buttonPanel.add(radio2, buttonPanelGBC);
-		group.add(radio1);
-		group.add(radio2);
-		radio1.addActionListener(this);
-		radio2.addActionListener(this);
+		buttonPanel.add(radiobuttons[1], buttonPanelGBC);
+		group.add(radiobuttons[0]);
+		group.add(radiobuttons[1]);
+		radiobuttons[0].addActionListener(this);
+		radiobuttons[1].addActionListener(this);
 
 		// Ställa in och adda checkboxes
 		checkboxPanel.setLayout(new GridBagLayout());
@@ -150,41 +127,37 @@ public class Gui extends JFrame implements ActionListener {
 		c = new JCheckBox[5];
 		for (int i = 0; i < c.length; ++i) {
 			c[i] = new JCheckBox();
-			checkboxPanelGBC.gridx = i+1;
+			checkboxPanelGBC.gridx = i + 1;
 			checkboxPanel.add(c[i], checkboxPanelGBC);
 			c[i].addActionListener(this);
+			c[i].setEnabled(false);
 		}
 
 		// Lägg till textArea
 		textArea.setOpaque(false);
 		textArea.setFont(new Font("Helvetica", Font.BOLD, 18));
-		textArea.setText("Du fick kåk, 1000 poäng till dig!");
+		// textArea.setText("Du fick kåk, 1000 poäng till dig!");
 		textMessagePanel.add(textArea);
 
-		// Ställa in korten
-		card1.setIcon(back);
-		card2.setIcon(back);
-		card3.setIcon(back);
-		card4.setIcon(back);
-		card5.setIcon(back);
+		// Adda ImageIcons till korten, default är baksidan av kortet
+		for (int i = 0; i < cards.length; i++) {
+			cards[i].setIcon(back);
+		}
 
 		// Adda korten i kortpanelen
 		cardPanel.setLayout(new GridBagLayout());
+		cardPanel.setPreferredSize(new Dimension(550, 150));
 		GridBagConstraints cardPanelGBC = new GridBagConstraints();
 		cardPanelGBC.insets = new Insets(5, 5, 5, 5);
-		cardPanelGBC.gridx = 1;
-		cardPanel.add(card1, cardPanelGBC);
-		cardPanelGBC.gridx = 2;
-		cardPanel.add(card2, cardPanelGBC);
-		cardPanelGBC.gridx = 3;
-		cardPanel.add(card3, cardPanelGBC);
-		cardPanelGBC.gridx = 4;
-		cardPanel.add(card4, cardPanelGBC);
-		cardPanelGBC.gridx = 5;
-		cardPanel.add(card5, cardPanelGBC);
+		cardPanelGBC.gridy = 1;
+		for (int i = 0; i < 5; i++) {
+			cardPanelGBC.gridx = i + 1;
+			cardPanel.add(cards[i], cardPanelGBC);
+		}
+
+		// set layout för frame
 		setLayout(new GridBagLayout());
 		GridBagConstraints frameGBC = new GridBagConstraints();
-
 		frameGBC.insets = new Insets(10, 0, 10, 0);
 		// Adda text i framen
 		frameGBC.gridx = 1;
@@ -204,7 +177,7 @@ public class Gui extends JFrame implements ActionListener {
 		frameGBC.gridwidth = 5;
 		frameGBC.gridheight = 1;
 		add(checkboxPanel, frameGBC);
-		// Adda  buttonPanel i framen
+		// Adda buttonPanel i framen
 		frameGBC.gridx = 1;
 		frameGBC.gridy = 7;
 		frameGBC.gridwidth = 5;
@@ -223,23 +196,34 @@ public class Gui extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == start) {
-			//TODO: lägg in anrop till startmetoden här
+			// TODO: lägg in anrop till startmetoden här
 			textArea.setText("START");
 			start.setEnabled(false);
 			swap.setEnabled(true);
 			hold.setEnabled(true);
+			//hand = new Hand();
+			//setIconsForHand(hand);
+			enableCheckboxes();
+			disableRadiobuttons();
 		}
 		if (e.getSource() == swap) {
-			//TODO: lägg in anrop till swapmetoden här
+			// TODO: lägg in anrop till swapmetoden här
 			textArea.setText("SWAP");
+			setIcon(new Card(6, Suit.HEARTS), 2);
 			resetCheckboxes();
+			checkNrOfSwaps();
+			
+
 		}
+			// Eventuellt bode denna heta "CALL" istället, engelska för syna
 		if (e.getSource() == hold) {
-			//TODO: lägg in anrop till holdmetoden här
+			// TODO: lägg in anrop till holdmetoden här
 			textArea.setText("HOLD");
 			start.setEnabled(true);
-			swap.setEnabled(false);
 			hold.setEnabled(false);
+			disableCheckboxes();
+			swapCount = 0;
+			enableRadiobuttons();
 		}
 		for (int i = 0; i < 5; ++i) {
 			if (c[i].isSelected()) {
@@ -250,33 +234,236 @@ public class Gui extends JFrame implements ActionListener {
 				// TODO: Unmark card i.
 			}
 		}
+		// Här väljer vi hur många swaps man får göra
+		for (int i = 0; i < 2; i++) {
+			if (radiobuttons[i].isSelected())
+				nrOfSwaps = i + 1;
+			String s = "" + nrOfSwaps;
+			textArea.setText(s);
+		}
+	}
+
+	private void checkNrOfSwaps() {
+		swapCount++;
+		if (nrOfSwaps == swapCount) {
+			swap.setEnabled(false);
+		}
 		
-		if (radio1.isSelected()) {
-			//TODO: väljer att ett kort ska swapas
-		}
-		if (radio2.isSelected()) {
-			//TODO: väljer att två kort ska swapas
-		}
 	}
 
 	public static void setText(String text) {
 		textArea.setText(text);
 	}
 
-	// public static void setIconsForHand(Hand hand) {
-	//
-	// }
+	public static void setIconsForHand(Hand hand) {
+		Card[] tempCards = hand.getCards();
 
-	public static void setIconsForSwap(Card card) {
+		for (int index = 0; index < tempCards.length; index++) {
+			setIcon(tempCards[index], index);
+		}
+	}
 
+	public static void setIcon(Card card, int index) {
+		if (card.getSuit() == Suit.SPADES) {
+			switch (card.getValue()) {
+			case 1:
+				cards[index].setIcon(spadeCards[0]);
+				break;
+			case 2:
+				cards[index].setIcon(spadeCards[1]);
+				break;
+			case 3:
+				cards[index].setIcon(spadeCards[2]);
+				break;
+			case 4:
+				cards[index].setIcon(spadeCards[3]);
+				break;
+			case 5:
+				cards[index].setIcon(spadeCards[4]);
+				break;
+			case 6:
+				cards[index].setIcon(spadeCards[5]);
+				break;
+			case 7:
+				cards[index].setIcon(spadeCards[6]);
+				break;
+			case 8:
+				cards[index].setIcon(spadeCards[7]);
+				break;
+			case 9:
+				cards[index].setIcon(spadeCards[8]);
+				break;
+			case 10:
+				cards[index].setIcon(spadeCards[9]);
+				break;
+			case 11:
+				cards[index].setIcon(spadeCards[10]);
+				break;
+			case 12:
+				cards[index].setIcon(spadeCards[11]);
+				break;
+			case 13:
+				cards[index].setIcon(spadeCards[12]);
+				break;
+			}
+		} else if (card.getSuit() == Suit.CLUBS) {
+			switch (card.getValue()) {
+			case 1:
+				cards[index].setIcon(spadeCards[0]);
+				break;
+			case 2:
+				cards[index].setIcon(spadeCards[1]);
+				break;
+			case 3:
+				cards[index].setIcon(spadeCards[2]);
+				break;
+			case 4:
+				cards[index].setIcon(spadeCards[3]);
+				break;
+			case 5:
+				cards[index].setIcon(spadeCards[4]);
+				break;
+			case 6:
+				cards[index].setIcon(spadeCards[5]);
+				break;
+			case 7:
+				cards[index].setIcon(spadeCards[6]);
+				break;
+			case 8:
+				cards[index].setIcon(spadeCards[7]);
+				break;
+			case 9:
+				cards[index].setIcon(spadeCards[8]);
+				break;
+			case 10:
+				cards[index].setIcon(spadeCards[9]);
+				break;
+			case 11:
+				cards[index].setIcon(spadeCards[10]);
+				break;
+			case 12:
+				cards[index].setIcon(spadeCards[11]);
+				break;
+			case 13:
+				cards[index].setIcon(spadeCards[12]);
+				break;
+			}
+		} else if (card.getSuit() == Suit.DIAMONDS) {
+			switch (card.getValue()) {
+			case 1:
+				cards[index].setIcon(spadeCards[0]);
+				break;
+			case 2:
+				cards[index].setIcon(spadeCards[1]);
+				break;
+			case 3:
+				cards[index].setIcon(spadeCards[2]);
+				break;
+			case 4:
+				cards[index].setIcon(spadeCards[3]);
+				break;
+			case 5:
+				cards[index].setIcon(spadeCards[4]);
+				break;
+			case 6:
+				cards[index].setIcon(spadeCards[5]);
+				break;
+			case 7:
+				cards[index].setIcon(spadeCards[6]);
+				break;
+			case 8:
+				cards[index].setIcon(spadeCards[7]);
+				break;
+			case 9:
+				cards[index].setIcon(spadeCards[8]);
+				break;
+			case 10:
+				cards[index].setIcon(spadeCards[9]);
+				break;
+			case 11:
+				cards[index].setIcon(spadeCards[10]);
+				break;
+			case 12:
+				cards[index].setIcon(spadeCards[11]);
+				break;
+			case 13:
+				cards[index].setIcon(spadeCards[12]);
+				break;
+			}
+		} else if (card.getSuit() == Suit.HEARTS) {
+			switch (card.getValue()) {
+			case 1:
+				cards[index].setIcon(spadeCards[0]);
+				break;
+			case 2:
+				cards[index].setIcon(spadeCards[1]);
+				break;
+			case 3:
+				cards[index].setIcon(spadeCards[2]);
+				break;
+			case 4:
+				cards[index].setIcon(spadeCards[3]);
+				break;
+			case 5:
+				cards[index].setIcon(spadeCards[4]);
+				break;
+			case 6:
+				cards[index].setIcon(spadeCards[5]);
+				break;
+			case 7:
+				cards[index].setIcon(spadeCards[6]);
+				break;
+			case 8:
+				cards[index].setIcon(spadeCards[7]);
+				break;
+			case 9:
+				cards[index].setIcon(spadeCards[8]);
+				break;
+			case 10:
+				cards[index].setIcon(spadeCards[9]);
+				break;
+			case 11:
+				cards[index].setIcon(spadeCards[10]);
+				break;
+			case 12:
+				cards[index].setIcon(spadeCards[11]);
+				break;
+			case 13:
+				cards[index].setIcon(spadeCards[12]);
+				break;
+			}
+		}
 	}
 
 	private void resetCheckboxes() {
-		for(int i = 0; i < c.length; i++) {
-			if(c[i].isSelected()) {
+		for (int i = 0; i < c.length; i++) {
+			if (c[i].isSelected()) {
 				c[i].doClick();
 			}
 		}
 	}
+
+	private void enableCheckboxes() {
+		for (int i = 0; i < c.length; ++i) {
+			c[i].setEnabled(true);
+		}
+	}
+
+	private void disableCheckboxes() {
+		for (int i = 0; i < c.length; ++i) {
+			c[i].setEnabled(false);
+		}
+	}
+
+	private void enableRadiobuttons() {
+		for (int i = 0; i < 2; i++) {
+			radiobuttons[i].setEnabled(true);
+		}
+	}
 	
+	private void disableRadiobuttons() {
+		for (int i = 0; i < 2; i++) {
+			radiobuttons[i].setEnabled(false);
+		}
+	}
 }

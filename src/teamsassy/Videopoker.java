@@ -19,19 +19,21 @@ public class Videopoker {
 
 	private void hold() {
 		player++;
-	}
 
-	public void start() {
-		deck.reset();
-		for (int i = 0; i < hands.length; ++i) {
-			hands[i].clear();
-		}
+      }
 
-		for (int i = 0; i < hands.length; ++i) {
-			for (int j = 0; j < 5; ++j) {
-				hands[i].addCard(deck.drawCard());
-			}
-		}
+   public void start() {
+      deck = new Deck();
+      for (int i = 0; i < hands.length; ++i) {
+         hands[i].clear();
+      }
+
+      deck.shuffle();
+      for (int i = 0; i < hands.length; ++i) {
+         for (int j = 0; j < 5; ++j) {
+            hands[i].addCard(deck.drawCard());
+         }
+      }
 
 		player = 0;
 	}
