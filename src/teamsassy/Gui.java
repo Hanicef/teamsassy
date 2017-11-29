@@ -24,32 +24,28 @@ public class Gui extends JFrame implements ActionListener {
 	// Skapa massa variabler som behövs
 	public int nrOfSwaps = 1;
 	public int swapCount = 0;
-
 	private JPanel buttonPanel = new JPanel();
-
 	private JButton swap = new JButton("Swap");
 	private JButton start = new JButton("Start");
 	private JButton hold = new JButton("Hold");
-
+	
 	private JRadioButton[] radiobuttons = new JRadioButton[] { new JRadioButton("1 swap", true),
 			new JRadioButton("2 swap", false) };
-
-	private ButtonGroup group = new ButtonGroup();
-
+		private ButtonGroup group = new ButtonGroup();
+		
 	private JPanel checkboxPanel = new JPanel();
-
 	private JCheckBox[] c = new JCheckBox[5];
-
+	
 	private JPanel textMessagePanel = new JPanel();
 	private static JTextArea textArea = new JTextArea(3, 35);
-
+	
 	private JPanel cardPanel = new JPanel();
-
+	
 	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
 			new JLabel() };
-
+	
 	private ImageIcon back = new ImageIcon("src/images/back.png");
-
+	
 	private static ImageIcon[] spadeCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_spades.png"),
 			new ImageIcon("src/images/2_of_spades.png"), new ImageIcon("src/images/3_of_spades.png"),
 			new ImageIcon("src/images/4_of_spades.png"), new ImageIcon("src/images/5_of_spades.png"),
@@ -136,7 +132,7 @@ public class Gui extends JFrame implements ActionListener {
 		// Lägg till textArea
 		textArea.setOpaque(false);
 		textArea.setFont(new Font("Helvetica", Font.BOLD, 18));
-		// textArea.setText("Du fick kåk, 1000 poäng till dig!");
+		// textArea.setText("Starttext");
 		textMessagePanel.add(textArea);
 
 		// Adda ImageIcons till korten, default är baksidan av kortet
