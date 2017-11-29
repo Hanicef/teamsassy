@@ -19,6 +19,7 @@ public class Videopoker {
 
 	private void hold() {
 		player++;
+      }
 
    public void start() {
       deck.reset();
@@ -26,6 +27,7 @@ public class Videopoker {
          hands[i].clear();
       }
 
+      deck.shuffle();
       for (int i = 0; i < hands.length; ++i) {
          for (int j = 0; j < 5; ++j) {
             hands[i].addCard(deck.drawCard());
