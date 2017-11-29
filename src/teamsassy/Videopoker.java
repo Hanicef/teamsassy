@@ -22,7 +22,7 @@ public class Videopoker {
       }
 
    public void start() {
-      deck.reset();
+      deck = new Deck();
       for (int i = 0; i < hands.length; ++i) {
          hands[i].clear();
       }
@@ -39,8 +39,8 @@ public class Videopoker {
 
 	public void swapCards(boolean[] cardMask) {
 		for (int i = 0; i < 5; ++i) {
-			if (cardMask[ı]) {
-				hands[player].cards[i] = deck.drawCard();
+			if (cardMask[i]) {
+				hands[player].getCards()[i] = deck.drawCard();
 			}
 		}
 
