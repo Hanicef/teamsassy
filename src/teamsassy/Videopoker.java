@@ -10,15 +10,16 @@ public class Videopoker {
 		hands = new Hand[playercnt];
 		deck = new Deck();
 
-      for (int i = 0; i < playercnt; ++i) {
-         hands[i] = new Hand();
-      }
+		for (int i = 0; i < playercnt; ++i) {
+			hands[i] = new Hand();
+		}
 
 		player = 0;
 	}
 
 	private void hold() {
 		player++;
+
       }
 
    public void start() {
@@ -34,8 +35,8 @@ public class Videopoker {
          }
       }
 
-      player = 0;
-   }
+		player = 0;
+	}
 
 	public void swapCards(boolean[] cardMask) {
 		for (int i = 0; i < 5; ++i) {
@@ -52,49 +53,57 @@ public class Videopoker {
 	}
 
 	public int score(Hand hand) {
-		int score;
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-
-				// Par
-				if (hands[player].cards[i].getvalue == hands[player].cards[j + 1].getvalue) {
-					score = 1;
-				}
-				// Tvåpar
-				if (hands[player].cards[i].getvalue == hands[player].cards[j + 1].getvalue) {
-					for (int j = i; i < 4; i++) {
-						if (hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue) {
-
-							score = 2;
-						}
-
-					}
-
-				}
-				// Tretal
-				if (hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue == hands[player].cards[i
-						+ 2].getvalue) {
-					score = 3;
-				}
-				// Fyrtal
-				if (hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue == hands[player].cards[i
-						+ 2].getvalue == hands[player].cards[i + 3].getvalue) {
-					score = 4;
-				}
-				// Kåk
-				if (hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue == hands[player].cards[i
-						+ 2].getvalue) {
-					for (int j = i; i < 4; i++) {
-						if (hands[player].cards[i].getvalue == hands[player].cards[i + 1].getvalue) {
-
-							score = 2;
-						}
-
-					}
-
-				}
+		int[] values = new int[14];
+		int sameSuit = 0;
+		int s = 0;
+		int sameCard = 0;
+		boolean flush = false;
+		
+		for(int m = 1; m <= 13; m++) {
+			values[m] = 0;
+		}
+		for (int x=0; x<=4; x++)
+		{
+			values[hand.getCards()[x].getValue()]++;
+			for(int i = 0; i < 5; i++) {
+				
+			if(hand.getCards()[x].getSuit() == hand.getCards()[i].getSuit() && i != x)
+			sameSuit++;
+			if(sameSuit == 5) {
+				flush = true;
+				s = 10;
+			}
 			}
 		}
-
+		for(int m = 0; m < 13; m++) {
+//			par
+			System.out.println(values[m]);
+			if(values[m] == 2) {
+				s = 1;
+			}
+//			triss
+			else if(values[m] == 3) {
+				s = 3;
+			}
+//			fyrtal
+			else if(values[m] == 4) {
+				s = 7;
+			}
+			for(int i = 0; i < 13; i++) {
+//				tvåpar
+				if(values[m] == 2 && values[i] == 2 && i != m) {
+					s = 2;
+				}
+//				kåk
+				if(values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m ) {
+					s = 6;
+					
+				}
+				
+			}
+		}
+		System.out.println();
+		return s;
 	}
 }
+
