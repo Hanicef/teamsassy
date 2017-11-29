@@ -211,11 +211,8 @@ public class Gui extends JFrame implements ActionListener {
 			textArea.setText("SWAP");
 			setIcon(new Card(6, Suit.HEARTS), 2);
 			resetCheckboxes();
-
-			swapCount++;
-			if (nrOfSwaps == swapCount) {
-				swap.setEnabled(false);
-			}
+			checkNrOfSwaps();
+			
 
 		}
 			// Eventuellt bode denna heta "CALL" istället, engelska för syna
@@ -244,6 +241,14 @@ public class Gui extends JFrame implements ActionListener {
 			String s = "" + nrOfSwaps;
 			textArea.setText(s);
 		}
+	}
+
+	private void checkNrOfSwaps() {
+		swapCount++;
+		if (nrOfSwaps == swapCount) {
+			swap.setEnabled(false);
+		}
+		
 	}
 
 	public static void setText(String text) {
