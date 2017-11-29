@@ -20,20 +20,20 @@ public class Videopoker {
 	private void hold() {
 		player++;
 
-      }
+	}
 
-   public void start() {
-      deck = new Deck();
-      for (int i = 0; i < hands.length; ++i) {
-         hands[i].clear();
-      }
+	public void start() {
+		deck = new Deck();
+		for (int i = 0; i < hands.length; ++i) {
+			hands[i].clear();
+		}
 
-      deck.shuffle();
-      for (int i = 0; i < hands.length; ++i) {
-         for (int j = 0; j < 5; ++j) {
-            hands[i].addCard(deck.drawCard());
-         }
-      }
+		deck.shuffle();
+		for (int i = 0; i < hands.length; ++i) {
+			for (int j = 0; j < 5; ++j) {
+				hands[i].addCard(deck.drawCard());
+			}
+		}
 
 		player = 0;
 	}
@@ -56,52 +56,50 @@ public class Videopoker {
 		int s = 0;
 		int sameCard = 0;
 		boolean flush = false;
-		
-		for(int m = 1; m <= 13; m++) {
+
+		for (int m = 1; m <= 13; m++) {
 			values[m] = 0;
 		}
-		for (int x=0; x<=4; x++)
-		{
+		for (int x = 0; x <= 4; x++) {
 			values[hand.getCards()[x].getValue()]++;
-			for(int i = 0; i < 5; i++) {
-				
-			if(hand.getCards()[x].getSuit() == hand.getCards()[i].getSuit() && i != x)
-			sameSuit++;
-			if(sameSuit == 5) {
-				flush = true;
-				s = 10;
-			}
+			for (int i = 0; i < 5; i++) {
+
+				if (hand.getCards()[x].getSuit() == hand.getCards()[i].getSuit() && i != x)
+					sameSuit++;
+				if (sameSuit == 5) {
+					flush = true;
+					s = 10;
+				}
 			}
 		}
-		for(int m = 0; m < 13; m++) {
-//			par
+		for (int m = 0; m < 13; m++) {
+			// par
 			System.out.println(values[m]);
-			if(values[m] == 2) {
+			if (values[m] == 2) {
 				s = 1;
 			}
-//			triss
-			else if(values[m] == 3) {
+			// triss
+			else if (values[m] == 3) {
 				s = 3;
 			}
-//			fyrtal
-			else if(values[m] == 4) {
+			// fyrtal
+			else if (values[m] == 4) {
 				s = 7;
 			}
-			for(int i = 0; i < 13; i++) {
-//				tvåpar
-				if(values[m] == 2 && values[i] == 2 && i != m) {
+			for (int i = 0; i < 13; i++) {
+				// tvåpar
+				if (values[m] == 2 && values[i] == 2 && i != m) {
 					s = 2;
 				}
-//				kåk
-				if(values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m ) {
+				// kåk
+				if (values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m) {
 					s = 6;
-					
+
 				}
-				
+
 			}
 		}
 		System.out.println();
 		return s;
 	}
 }
-
