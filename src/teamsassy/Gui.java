@@ -1,6 +1,5 @@
 package teamsassy;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -13,39 +12,46 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Gui extends JFrame implements ActionListener {
 
 	// Skapa massa variabler som behövs
+	Videopoker videopoker = new Videopoker(1);
+
 	public int nrOfSwaps = 1;
 	public int swapCount = 0;
 	private JPanel buttonPanel = new JPanel();
 	private JButton swap = new JButton("Swap");
 	private JButton start = new JButton("Start");
 	private JButton hold = new JButton("Hold");
-	
+
 	private JRadioButton[] radiobuttons = new JRadioButton[] { new JRadioButton("1 swap", true),
 			new JRadioButton("2 swap", false) };
-		private ButtonGroup group = new ButtonGroup();
-		
+	private ButtonGroup group = new ButtonGroup();
+
 	private JPanel checkboxPanel = new JPanel();
 	private JCheckBox[] c = new JCheckBox[5];
-	
+
 	private JPanel textMessagePanel = new JPanel();
-	private static JTextArea textArea = new JTextArea(3, 35);
-	
+	private static JTextArea textMessageArea = new JTextArea(3, 20);
+	private static JTextArea moneyLeft = new JTextArea("100", 1, 4);
+	private JComponent[] textAreas = new JTextArea[] {new JTextArea("money left:", 1, 10), new JTextArea("bet:", 1, 4)};
+	private JTextField betField = new JTextField(4);
+
 	private JPanel cardPanel = new JPanel();
-	
+
 	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
 			new JLabel() };
-	
+
 	private ImageIcon back = new ImageIcon("src/images/back.png");
-	
+
 	private static ImageIcon[] spadeCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_spades.png"),
 			new ImageIcon("src/images/2_of_spades.png"), new ImageIcon("src/images/3_of_spades.png"),
 			new ImageIcon("src/images/4_of_spades.png"), new ImageIcon("src/images/5_of_spades.png"),
@@ -54,7 +60,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_spades.png"), new ImageIcon("src/images/knight_of_spades.png"),
 			new ImageIcon("src/images/queen_of_spades.png"), new ImageIcon("src/images/king_of_spades.png") };
 
-	private ImageIcon[] clubCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_clubs.png"),
+	private static ImageIcon[] clubCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_clubs.png"),
 			new ImageIcon("src/images/2_of_clubs.png"), new ImageIcon("src/images/3_of_clubs.png"),
 			new ImageIcon("src/images/4_of_clubs.png"), new ImageIcon("src/images/5_of_clubs.png"),
 			new ImageIcon("src/images/6_of_clubs.png"), new ImageIcon("src/images/7_of_clubs.png"),
@@ -62,7 +68,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_clubs.png"), new ImageIcon("src/images/knight_of_clubs.png"),
 			new ImageIcon("src/images/queen_of_clubs.png"), new ImageIcon("src/images/king_of_clubs.png") };
 
-	private ImageIcon[] diamondCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_diamonds.png"),
+	private static ImageIcon[] diamondCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_diamonds.png"),
 			new ImageIcon("src/images/2_of_diamonds.png"), new ImageIcon("src/images/3_of_diamonds.png"),
 			new ImageIcon("src/images/4_of_diamonds.png"), new ImageIcon("src/images/5_of_diamonds.png"),
 			new ImageIcon("src/images/6_of_diamonds.png"), new ImageIcon("src/images/7_of_diamonds.png"),
@@ -70,7 +76,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_diamonds.png"), new ImageIcon("src/images/knight_of_diamonds.png"),
 			new ImageIcon("src/images/queen_of_diamonds.png"), new ImageIcon("src/images/king_of_diamonds.png") };
 
-	private ImageIcon[] heartCard = new ImageIcon[] { new ImageIcon("src/images/ace_of_hearts.png"),
+	private static ImageIcon[] heartCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_hearts.png"),
 			new ImageIcon("src/images/2_of_hearts.png"), new ImageIcon("src/images/3_of_hearts.png"),
 			new ImageIcon("src/images/4_of_hearts.png"), new ImageIcon("src/images/5_of_hearts.png"),
 			new ImageIcon("src/images/6_of_hearts.png"), new ImageIcon("src/images/7_of_hearts.png"),
@@ -80,7 +86,6 @@ public class Gui extends JFrame implements ActionListener {
 
 	public Gui() {
 		super("VideoPoker");
-
 		// Ställa in och adda knapparna
 		Font buttonFont = new Font("Helvetica", Font.BOLD, 24);
 		Dimension buttonDim = new Dimension(120, 55);
@@ -129,11 +134,39 @@ public class Gui extends JFrame implements ActionListener {
 			c[i].setEnabled(false);
 		}
 
-		// Lägg till textArea
-		textArea.setOpaque(false);
-		textArea.setFont(new Font("Helvetica", Font.BOLD, 18));
-		// textArea.setText("Starttext");
-		textMessagePanel.add(textArea);
+		// Ställ in och lägg till textAreas
+		for (int i = 0; i < textAreas.length; i++) {
+			textAreas[i].setOpaque(false);
+			//textAreas[i].setFont(new Font("Helvetica", Font.BOLD, 12));
+		}
+		moneyLeft.setOpaque(false);
+		textMessageArea.setOpaque(false);
+		textMessageArea.setFont(new Font("Helvetica", Font.BOLD, 18));
+		textMessageArea.setText("Starttext dfgdfghfgdgd sefrg \n dfgdfhdghdfgsdfsdfdghfhfg \n xcvjhsdsdkjfdslf");
+		
+		//Adda textfälten till textpanelen
+		textMessagePanel.setPreferredSize(new Dimension(550, 100));
+		textMessagePanel.setLayout(new GridBagLayout());
+		GridBagConstraints textMessagePanelGBC = new GridBagConstraints();		
+		textMessagePanelGBC.gridx = 1;
+//		textMessagePanelGBC.gridwidth = 2;
+//		textMessagePanelGBC.gridheight = 2;
+		textMessagePanel.add(textMessageArea, textMessagePanelGBC);
+		
+		textMessagePanelGBC.gridx = 3;
+		textMessagePanelGBC.gridwidth = 1;
+		textMessagePanelGBC.gridwidth = 1;
+		textMessagePanel.add(textAreas[0], textMessagePanelGBC);
+		
+		textMessagePanelGBC.gridx = 4;
+		textMessagePanel.add(moneyLeft, textMessagePanelGBC);
+		
+		textMessagePanelGBC.gridx = 3;
+		textMessagePanelGBC.gridy = 2;
+		textMessagePanel.add(textAreas[1], textMessagePanelGBC);
+		
+		textMessagePanelGBC.gridx = 4;
+		textMessagePanel.add(betField, textMessagePanelGBC);
 
 		// Adda ImageIcons till korten, default är baksidan av kortet
 		for (int i = 0; i < cards.length; i++) {
@@ -151,7 +184,7 @@ public class Gui extends JFrame implements ActionListener {
 			cardPanel.add(cards[i], cardPanelGBC);
 		}
 
-		// set layout för frame
+		// set layout för frame och adda komponenter
 		setLayout(new GridBagLayout());
 		GridBagConstraints frameGBC = new GridBagConstraints();
 		frameGBC.insets = new Insets(10, 0, 10, 0);
@@ -160,7 +193,7 @@ public class Gui extends JFrame implements ActionListener {
 		frameGBC.gridy = 1;
 		frameGBC.gridwidth = 5;
 		frameGBC.gridheight = 1;
-		add(textArea, frameGBC);
+		add(textMessagePanel, frameGBC);
 		// Adda cardPanel i framen
 		frameGBC.gridx = 1;
 		frameGBC.gridy = 2;
@@ -182,7 +215,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		// inställningar för Framen
 		// getContentPane().setBackground(Color.DARK_GRAY);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}
@@ -193,49 +226,42 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (e.getSource() == start) {
 			// TODO: lägg in anrop till startmetoden här
-			textArea.setText("START");
+			textMessageArea.setText("START");
 			start.setEnabled(false);
 			swap.setEnabled(true);
 			hold.setEnabled(true);
-			//hand = new Hand();
-			//setIconsForHand(hand);
+			// hand = new Hand();
+			// setIconsForHand(hand);
 			enableCheckboxes();
 			disableRadiobuttons();
-		}
-		if (e.getSource() == swap) {
+			videopoker.start();
+			setIconsForHand(videopoker.getHand(0));
+		} else if (e.getSource() == swap) {
 			// TODO: lägg in anrop till swapmetoden här
-			textArea.setText("SWAP");
-			setIcon(new Card(6, Suit.HEARTS), 2);
+			textMessageArea.setText("SWAP");
 			resetCheckboxes();
 			checkNrOfSwaps();
-			
+			boolean[] mask = new boolean[] { c[0].isSelected(), c[1].isSelected(), c[2].isSelected(), c[3].isSelected(),
+					c[4].isSelected(), };
+			videopoker.swapCards(mask);
+			setIconsForHand(videopoker.getHand(0));
 
-		}
-			// Eventuellt bode denna heta "CALL" istället, engelska för syna
-		if (e.getSource() == hold) {
+		} else if (e.getSource() == hold) {
 			// TODO: lägg in anrop till holdmetoden här
-			textArea.setText("HOLD");
+			textMessageArea.setText("HOLD");
 			start.setEnabled(true);
 			hold.setEnabled(false);
 			disableCheckboxes();
 			swapCount = 0;
 			enableRadiobuttons();
-		}
-		for (int i = 0; i < 5; ++i) {
-			if (c[i].isSelected()) {
-				// TODO: Mark card i.
-				String s = "c " + i + " is selected";
-				textArea.setText(s);
-			} else {
-				// TODO: Unmark card i.
-			}
+			videopoker.hold();
 		}
 		// Här väljer vi hur många swaps man får göra
 		for (int i = 0; i < 2; i++) {
 			if (radiobuttons[i].isSelected())
 				nrOfSwaps = i + 1;
 			String s = "" + nrOfSwaps;
-			textArea.setText(s);
+			textMessageArea.setText(s);
 		}
 	}
 
@@ -244,14 +270,14 @@ public class Gui extends JFrame implements ActionListener {
 		if (nrOfSwaps == swapCount) {
 			swap.setEnabled(false);
 		}
-		
+
 	}
 
-	public static void setText(String text) {
-		textArea.setText(text);
+	public static void setTextMessage(String text) {
+		textMessageArea.setText(text);
 	}
 
-	public static void setIconsForHand(Hand hand) {
+	public void setIconsForHand(Hand hand) {
 		Card[] tempCards = hand.getCards();
 
 		for (int index = 0; index < tempCards.length; index++) {
@@ -259,175 +285,15 @@ public class Gui extends JFrame implements ActionListener {
 		}
 	}
 
-	public static void setIcon(Card card, int index) {
+	public void setIcon(Card card, int index) {
 		if (card.getSuit() == Suit.SPADES) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(spadeCards[card.getValue() - 1]);
 		} else if (card.getSuit() == Suit.CLUBS) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(clubCards[card.getValue() - 1]);
 		} else if (card.getSuit() == Suit.DIAMONDS) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(diamondCards[card.getValue() - 1]);
 		} else if (card.getSuit() == Suit.HEARTS) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(heartCards[card.getValue() - 1]);
 		}
 	}
 
@@ -456,7 +322,7 @@ public class Gui extends JFrame implements ActionListener {
 			radiobuttons[i].setEnabled(true);
 		}
 	}
-	
+
 	private void disableRadiobuttons() {
 		for (int i = 0; i < 2; i++) {
 			radiobuttons[i].setEnabled(false);

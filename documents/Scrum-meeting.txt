@@ -4,7 +4,7 @@ Frågorna att ställa under scrum-möte som varje deltagare svarar på.
 3. Har du haft några hinder?
 
 
-Scrum-möte 2017-11-28
+Scrum-möte 2017-11-28 Scrum-master Joella
 Gustaf 
 har jobbat på videopokerklassen till det läget att han behöver ha deck och hand klassen för att kunna fortsätta. 
 Innan han har dem kan har inte fortsätta. 
@@ -23,4 +23,31 @@ Joella
 har skapat enum och card-klassen och även gjort en tidsplan för de olika delarna i projektet samt gjort ett schema för vem som ska var scrum-master.
 Till nästa gång så ska hon göra deck-klassen så klar som möjligt och även fortsätta med scrum-master arbetet.
 
-Nästa scrum-möte 2017-11-29
+
+Nästa scrum-möte 2017-11-29 Scrum-master Joella
+Sebastian
+Har gjort GUI mer eller mindre klart,
+ska jobba vidare att implementera med videopokerklassen och lägga till nya features för nästa storys,
+Inga hinder mer än att han behöver hand-klassen
+
+Gustaf
+har jobbat på videopokerklassen,
+jobbar vidare med sebastian för att implementera videopoker med gui. 
+Han behöver även handklassen för att kunna göra klart videopoker.
+
+Robin
+ska börja jobba med henning på scoremetoden
+
+Henning
+har jobbat vidare på scoremetoden och kommit en bit på väg med den.
+Kommer behöva hand-klassen för att bli helt klar
+
+Sia
+Ska jobba på hand-klassen
+
+Joella
+Har gjort klar deck klassen, 
+ska jobba på att kolla på nästa story, börja strukturera upp hur den kan se ut.
+
+Nästa scrum-möte 2017-11-30 Scrum-master Sebastian
+

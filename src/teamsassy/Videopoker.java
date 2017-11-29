@@ -19,8 +19,17 @@ public class Videopoker {
 		player = 0;
 	}
 
-	private void hold() {
+	public void hold() {
+                Hand dealer;
 		player++;
+
+                if (player >= hands.length) {
+                    dealer = new Hand();
+
+                    for (int i = 0; i < 5; ++i) {
+                        dealer.addCard(deck.drawCard());
+                    }
+                }
 
 	}
 
@@ -46,8 +55,6 @@ public class Videopoker {
 				hands[player].getCards()[i] = deck.drawCard();
 			}
 		}
-
-		hold(); // Next player.
 	}
 
 	public Hand getHand(int index) {
