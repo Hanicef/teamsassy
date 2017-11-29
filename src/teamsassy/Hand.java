@@ -6,12 +6,13 @@ public class Hand {
    private Card[] cards;
    private int cardCount;
    
-   
+    
    
 
    public Hand() {
 	   cardCount = 0;
 	   cards = new Card[5];
+	 
 	   
    }
 
