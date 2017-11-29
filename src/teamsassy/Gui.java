@@ -56,7 +56,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_spades.png"), new ImageIcon("src/images/knight_of_spades.png"),
 			new ImageIcon("src/images/queen_of_spades.png"), new ImageIcon("src/images/king_of_spades.png") };
 
-	private ImageIcon[] clubCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_clubs.png"),
+	private static ImageIcon[] clubCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_clubs.png"),
 			new ImageIcon("src/images/2_of_clubs.png"), new ImageIcon("src/images/3_of_clubs.png"),
 			new ImageIcon("src/images/4_of_clubs.png"), new ImageIcon("src/images/5_of_clubs.png"),
 			new ImageIcon("src/images/6_of_clubs.png"), new ImageIcon("src/images/7_of_clubs.png"),
@@ -64,7 +64,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_clubs.png"), new ImageIcon("src/images/knight_of_clubs.png"),
 			new ImageIcon("src/images/queen_of_clubs.png"), new ImageIcon("src/images/king_of_clubs.png") };
 
-	private ImageIcon[] diamondCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_diamonds.png"),
+	private static ImageIcon[] diamondCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_diamonds.png"),
 			new ImageIcon("src/images/2_of_diamonds.png"), new ImageIcon("src/images/3_of_diamonds.png"),
 			new ImageIcon("src/images/4_of_diamonds.png"), new ImageIcon("src/images/5_of_diamonds.png"),
 			new ImageIcon("src/images/6_of_diamonds.png"), new ImageIcon("src/images/7_of_diamonds.png"),
@@ -72,7 +72,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_diamonds.png"), new ImageIcon("src/images/knight_of_diamonds.png"),
 			new ImageIcon("src/images/queen_of_diamonds.png"), new ImageIcon("src/images/king_of_diamonds.png") };
 
-	private ImageIcon[] heartCard = new ImageIcon[] { new ImageIcon("src/images/ace_of_hearts.png"),
+	private static ImageIcon[] heartCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_hearts.png"),
 			new ImageIcon("src/images/2_of_hearts.png"), new ImageIcon("src/images/3_of_hearts.png"),
 			new ImageIcon("src/images/4_of_hearts.png"), new ImageIcon("src/images/5_of_hearts.png"),
 			new ImageIcon("src/images/6_of_hearts.png"), new ImageIcon("src/images/7_of_hearts.png"),
@@ -184,7 +184,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		// inställningar för Framen
 		// getContentPane().setBackground(Color.DARK_GRAY);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}
@@ -275,11 +275,11 @@ public class Gui extends JFrame implements ActionListener {
 		if (card.getSuit() == Suit.SPADES) {
 			cards[index].setIcon(spadeCards[card.getValue()-1]);
 		} else if (card.getSuit() == Suit.CLUBS) {
-			cards[index].setIcon(spadeCards[card.getValue()-1]);
+			cards[index].setIcon(clubCards[card.getValue()-1]);
 		} else if (card.getSuit() == Suit.DIAMONDS) {
-			cards[index].setIcon(spadeCards[card.getValue()-1]);
+			cards[index].setIcon(diamondCards[card.getValue()-1]);
 		} else if (card.getSuit() == Suit.HEARTS) {
-			cards[index].setIcon(spadeCards[card.getValue()-1]);
+			cards[index].setIcon(heartCards[card.getValue()-1]);
 		}
 	}
 
