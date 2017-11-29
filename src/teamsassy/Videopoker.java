@@ -18,7 +18,16 @@ public class Videopoker {
 	}
 
 	public void hold() {
+                Hand dealer;
 		player++;
+
+                if (player >= hands.length) {
+                    dealer = new Hand();
+
+                    for (int i = 0; i < 5; ++i) {
+                        dealer.addCard(deck.drawCard());
+                    }
+                }
 
 	}
 
