@@ -44,8 +44,6 @@ public class Videopoker {
 				hands[player].getCards()[i] = deck.drawCard();
 			}
 		}
-
-		hold(); // Next player.
 	}
 
 	public Hand getHand(int index) {
