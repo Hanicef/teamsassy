@@ -31,12 +31,8 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton start = new JButton("Start");
 	private JButton hold = new JButton("Hold");
 
-	// Försökt göra detta till en array men blev krångel med actionListener´n,
-	// nån får gärna försöka
 	private JRadioButton[] radiobuttons = new JRadioButton[] { new JRadioButton("1 swap", true),
 			new JRadioButton("2 swap", false) };
-	// private JRadioButton radio1 = new JRadioButton("1 swap", true);
-	// private JRadioButton radio2 = new JRadioButton("2 swap", false);
 
 	private ButtonGroup group = new ButtonGroup();
 
