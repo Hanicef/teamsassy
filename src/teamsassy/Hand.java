@@ -5,9 +5,7 @@ public class Hand {
 
    private Card[] cards;
    private int cardCount;
-   
-    
-   
+
 
    public Hand() {
 	   cardCount = 0;

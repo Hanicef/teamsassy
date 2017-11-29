@@ -22,6 +22,8 @@ import javax.swing.JTextArea;
 public class Gui extends JFrame implements ActionListener {
 
 	// Skapa massa variabler som behövs
+	Videopoker videopoker = new Videopoker(1);
+	
 	public int nrOfSwaps = 1;
 	public int swapCount = 0;
 	private JPanel buttonPanel = new JPanel();
@@ -201,14 +203,23 @@ public class Gui extends JFrame implements ActionListener {
 			//setIconsForHand(hand);
 			enableCheckboxes();
 			disableRadiobuttons();
+			videopoker.start();
+			setIconsForHand(videopoker.getHand(0));
 		}
 		if (e.getSource() == swap) {
 			// TODO: lägg in anrop till swapmetoden här
 			textArea.setText("SWAP");
-			setIcon(new Card(6, Suit.HEARTS), 2);
 			resetCheckboxes();
 			checkNrOfSwaps();
-			
+			boolean[] mask = new boolean[] {
+				c[0].isSelected(),
+				c[1].isSelected(),
+				c[2].isSelected(),
+				c[3].isSelected(),
+				c[4].isSelected(),
+			};
+			videopoker.swapCards(mask);
+			setIconsForHand(videopoker.getHand(0));
 
 		}
 			// Eventuellt bode denna heta "CALL" istället, engelska för syna
@@ -220,6 +231,7 @@ public class Gui extends JFrame implements ActionListener {
 			disableCheckboxes();
 			swapCount = 0;
 			enableRadiobuttons();
+			videopoker.hold();
 		}
 		for (int i = 0; i < 5; ++i) {
 			if (c[i].isSelected()) {
@@ -261,173 +273,13 @@ public class Gui extends JFrame implements ActionListener {
 
 	public static void setIcon(Card card, int index) {
 		if (card.getSuit() == Suit.SPADES) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(spadeCards[card.getValue()-1]);
 		} else if (card.getSuit() == Suit.CLUBS) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(spadeCards[card.getValue()-1]);
 		} else if (card.getSuit() == Suit.DIAMONDS) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(spadeCards[card.getValue()-1]);
 		} else if (card.getSuit() == Suit.HEARTS) {
-			switch (card.getValue()) {
-			case 1:
-				cards[index].setIcon(spadeCards[0]);
-				break;
-			case 2:
-				cards[index].setIcon(spadeCards[1]);
-				break;
-			case 3:
-				cards[index].setIcon(spadeCards[2]);
-				break;
-			case 4:
-				cards[index].setIcon(spadeCards[3]);
-				break;
-			case 5:
-				cards[index].setIcon(spadeCards[4]);
-				break;
-			case 6:
-				cards[index].setIcon(spadeCards[5]);
-				break;
-			case 7:
-				cards[index].setIcon(spadeCards[6]);
-				break;
-			case 8:
-				cards[index].setIcon(spadeCards[7]);
-				break;
-			case 9:
-				cards[index].setIcon(spadeCards[8]);
-				break;
-			case 10:
-				cards[index].setIcon(spadeCards[9]);
-				break;
-			case 11:
-				cards[index].setIcon(spadeCards[10]);
-				break;
-			case 12:
-				cards[index].setIcon(spadeCards[11]);
-				break;
-			case 13:
-				cards[index].setIcon(spadeCards[12]);
-				break;
-			}
+			cards[index].setIcon(spadeCards[card.getValue()-1]);
 		}
 	}
 
