@@ -12,8 +12,6 @@ public class Hand {
    public Hand() {
 	   cardCount = 0;
 	   cards = new Card[5];
-	 
-	   
    }
 
    public void addCard(Card card) {
