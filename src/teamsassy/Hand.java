@@ -19,7 +19,7 @@ public class Hand {
    }
 
    public Card[] getCards() {
-      return (Card[]) cards.toArray();
+      return cards.toArray(new Card[0]);
    }
 
    public void clear() {
