@@ -92,7 +92,7 @@ public class Videopoker {
 
 			}
 		}
-		for (int m = 0; m < 13; m++) {
+		for (int m = 0; m <= 13; m++) {
 			// par
 			if (values[m] == 2) {
 				s = 1;

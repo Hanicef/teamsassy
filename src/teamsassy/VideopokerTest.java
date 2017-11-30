@@ -29,6 +29,18 @@ class VideopokerTest {
 		   
 	}
 	@Test
+	void testParKungar() {
+		h.clear();
+		h.addCard(new Card(13, Suit.HEARTS));
+		h.addCard(new Card(4, Suit.SPADES));
+		h.addCard(new Card(13, Suit.HEARTS));
+		h.addCard(new Card(1, Suit.HEARTS));
+		h.addCard(new Card(3, Suit.HEARTS));
+		
+		assertEquals(1, p.score(h));
+		
+	}
+	@Test
 	void testTvåPar() {
 		h.clear();
 		h.addCard(new Card(2, Suit.HEARTS));
