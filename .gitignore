@@ -1,3 +1,4 @@
 ### filer vi vill ignorera ###
 bin
 .*
+src/.DS_Store
