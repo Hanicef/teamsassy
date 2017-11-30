@@ -30,7 +30,7 @@ public class Videopoker {
                         dealer.addCard(deck.drawCard());
                     }
                 }
-
+                score(hands[0]);
 	}
 
 	public void start() {

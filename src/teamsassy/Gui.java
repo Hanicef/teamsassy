@@ -142,7 +142,7 @@ public class Gui extends JFrame implements ActionListener {
 		moneyLeft.setOpaque(false);
 		textMessageArea.setOpaque(false);
 		textMessageArea.setFont(new Font("Helvetica", Font.BOLD, 18));
-		textMessageArea.setText("Starttext dfgdfghfgdgd sefrg \n dfgdfhdghdfgsdfsdfdghfhfg \n xcvjhsdsdkjfdslf");
+		textMessageArea.setText("Starttext");
 		
 		//Adda textfälten till textpanelen
 		textMessagePanel.setPreferredSize(new Dimension(550, 100));
@@ -226,7 +226,6 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (e.getSource() == start) {
 			// TODO: lägg in anrop till startmetoden här
-			textMessageArea.setText("START");
 			start.setEnabled(false);
 			swap.setEnabled(true);
 			hold.setEnabled(true);
@@ -238,7 +237,6 @@ public class Gui extends JFrame implements ActionListener {
 			setIconsForHand(videopoker.getHand(0));
 		} else if (e.getSource() == swap) {
 			// TODO: lägg in anrop till swapmetoden här
-			textMessageArea.setText("SWAP");
 			resetCheckboxes();
 			checkNrOfSwaps();
 			boolean[] mask = new boolean[] { c[0].isSelected(), c[1].isSelected(), c[2].isSelected(), c[3].isSelected(),
@@ -248,7 +246,6 @@ public class Gui extends JFrame implements ActionListener {
 
 		} else if (e.getSource() == hold) {
 			// TODO: lägg in anrop till holdmetoden här
-			textMessageArea.setText("HOLD");
 			start.setEnabled(true);
 			hold.setEnabled(false);
 			disableCheckboxes();
