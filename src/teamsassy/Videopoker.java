@@ -40,22 +40,12 @@ public class Videopoker {
 		}
 
 		deck.shuffle();
-		Card card1 = new Card(1, Suit.HEARTS);
-		Card card2 = new Card(1, Suit.HEARTS);
-		Card card3 = new Card(1, Suit.CLUBS);
-		Card card4 = new Card(2, Suit.SPADES);
-		Card card5 = new Card(2, Suit.CLUBS);
 		
-//		for (int i = 0; i < hands.length; ++i) {
-//			for (int j = 0; j < 5; ++j) {
-//				hands[i].addCard(deck.drawCard());
-//			}
-//		}
-		hands[0].addCard(card1);
-		hands[0].addCard(card2);
-		hands[0].addCard(card3);
-		hands[0].addCard(card4);
-		hands[0].addCard(card5);
+		for (int i = 0; i < hands.length; ++i) {
+			for (int j = 0; j < 5; ++j) {
+				hands[i].addCard(deck.drawCard());
+			}
+		}
 
 
 		player = 0;
@@ -119,12 +109,12 @@ public class Videopoker {
 				// tvÃ¥par
 				if (values[m] == 2 && values[i] == 2 && i != m) {
 					s = 2;
-					Gui.setTextMessage("Du fick Två par");
+					Gui.setTextMessage("Du fick Tvï¿½ par");
 				}
 				// kÃ¥k
 				if (values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m) {
 					s = 6;
-					Gui.setTextMessage("Du fick Kåk");
+					Gui.setTextMessage("Du fick Kï¿½k");
 
 				}
 
@@ -137,7 +127,7 @@ public class Videopoker {
 			if (flush == true) {
 				s = 11;
 				System.out.println(handen[0] + " Hej");
-				Gui.setTextMessage("Du fick Färgstege");
+				Gui.setTextMessage("Du fick Fï¿½rgstege");
 
 			}
 		}
