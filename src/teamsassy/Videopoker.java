@@ -2,6 +2,7 @@
 package teamsassy;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Videopoker {
 	private Deck deck;
@@ -20,17 +21,17 @@ public class Videopoker {
 	}
 
 	public void hold() {
-                Hand dealer;
+		Hand dealer;
 		player++;
 
-                if (player >= hands.length) {
-                    dealer = new Hand();
+		if (player >= hands.length) {
+			dealer = new Hand();
 
-                    for (int i = 0; i < 5; ++i) {
-                        dealer.addCard(deck.drawCard());
-                    }
-                }
-                score(hands[0]);
+			for (int i = 0; i < 5; ++i) {
+				dealer.addCard(deck.drawCard());
+			}
+		}
+		score(hands[0]);
 	}
 
 	public void start() {
@@ -40,22 +41,26 @@ public class Videopoker {
 		}
 
 		deck.shuffle();
-		
+
 		for (int i = 0; i < hands.length; ++i) {
 			for (int j = 0; j < 5; ++j) {
 				hands[i].addCard(deck.drawCard());
 			}
 		}
 
-
 		player = 0;
 	}
 
 	public void swapCards(boolean[] cardMask) {
-		for (int i = 0; i < 5; ++i) {
+		Card[] tempCards = hands[player].getCards();
+		for (int i = 0; i < 5; i++) {
 			if (cardMask[i]) {
-				hands[player].getCards()[i] = deck.drawCard();
+				tempCards[i] = deck.drawCard();
 			}
+		}
+		hands[player].clear();
+		for (int i = 0; i < 5; i++) {
+			hands[player].addCard(tempCards[i]);
 		}
 	}
 

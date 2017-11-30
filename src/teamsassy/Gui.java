@@ -229,8 +229,6 @@ public class Gui extends JFrame implements ActionListener {
 			start.setEnabled(false);
 			swap.setEnabled(true);
 			hold.setEnabled(true);
-			// hand = new Hand();
-			// setIconsForHand(hand);
 			enableCheckboxes();
 			disableRadiobuttons();
 			videopoker.start();
@@ -238,24 +236,26 @@ public class Gui extends JFrame implements ActionListener {
 			setTextMessage("");
 			
 		} else if (e.getSource() == swap) {
-			// TODO: lägg in anrop till swapmetoden här
-			resetCheckboxes();
-			checkNrOfSwaps();
+			// TODO: lägg in anrop till swapmetoden här			
 			boolean[] mask = new boolean[] { c[0].isSelected(), c[1].isSelected(), c[2].isSelected(), c[3].isSelected(),
 					c[4].isSelected(), };
 			videopoker.swapCards(mask);
 			setIconsForHand(videopoker.getHand(0));
+			checkNrOfSwaps();
+			resetCheckboxes();
 
 		} else if (e.getSource() == hold) {
 			// TODO: lägg in anrop till holdmetoden här
 			start.setEnabled(true);
 			hold.setEnabled(false);
 			swap.setEnabled(false);
+			resetCheckboxes();
 			disableCheckboxes();
 			swapCount = 0;
 			enableRadiobuttons();
 			videopoker.hold();
 			resetCardIcons();
+			
 		}
 		// Här väljer vi hur många swaps man får göra
 		for (int i = 0; i < 2; i++) {
