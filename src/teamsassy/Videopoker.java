@@ -91,23 +91,28 @@ public class Videopoker {
 			System.out.println(values[m]);
 			if (values[m] == 2) {
 				s = 1;
+				Gui.setTextMessage("Du fick par");
 			}
 			// triss
 			else if (values[m] == 3) {
 				s = 3;
+				Gui.setTextMessage("Du fick triss");
 			}
 			// fyrtal
 			else if (values[m] == 4) {
 				s = 8;
+				Gui.setTextMessage("Du fick fyrtal");
 			}
 			for (int i = 0; i < 13; i++) {
 				// tvÃ¥par
 				if (values[m] == 2 && values[i] == 2 && i != m) {
 					s = 2;
+					Gui.setTextMessage("Du fick Två par");
 				}
 				// kÃ¥k
 				if (values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m) {
 					s = 6;
+					Gui.setTextMessage("Du fick Kåk");
 
 				}
 
@@ -120,6 +125,7 @@ public class Videopoker {
 			if (flush == true) {
 				s = 11;
 				System.out.println(handen[0] + " Hej");
+				Gui.setTextMessage("Du fick Färgstege");
 
 			}
 		}
@@ -127,6 +133,7 @@ public class Videopoker {
 		if (handen[0] == 1 && handen[1] == 10 && handen[2] == 11 && handen[3] == 12 && handen[4] == 13
 				&& flush == true) {
 			s = 20;
+			Gui.setTextMessage("Du fick RoyalFlush");
 		}
 		System.out.println();
 		return s;
