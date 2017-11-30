@@ -79,7 +79,6 @@ public class Videopoker {
 
 			if (suits[0] == hand.getCards()[x].getSuit())
 				sameSuit++;
-			System.out.println(sameSuit);
 			if (sameSuit == 5) {
 				flush = true;
 				s = 5;
@@ -88,7 +87,6 @@ public class Videopoker {
 		}
 		for (int m = 0; m < 13; m++) {
 			// par
-			System.out.println(values[m]);
 			if (values[m] == 2) {
 				s = 1;
 			}
@@ -119,8 +117,6 @@ public class Videopoker {
 			// Färgstege
 			if (flush == true) {
 				s = 11;
-				System.out.println(handen[0] + " Hej");
-
 			}
 		}
 		// Royal Straight Flush
