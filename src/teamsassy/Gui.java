@@ -58,7 +58,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/6_of_spades.png"), new ImageIcon("src/images/7_of_spades.png"),
 			new ImageIcon("src/images/8_of_spades.png"), new ImageIcon("src/images/9_of_spades.png"),
 			new ImageIcon("src/images/10_of_spades.png"), new ImageIcon("src/images/knight_of_spades.png"),
-			new ImageIcon("src/images/queen_of_spades.png"), new ImageIcon("src/images/king_of_spades.png") };
+			new ImageIcon("src/images/queen_of_spades.png"), new ImageIcon("src/images/King_of_spades.png") };
 
 	private static ImageIcon[] clubCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_clubs.png"),
 			new ImageIcon("src/images/2_of_clubs.png"), new ImageIcon("src/images/3_of_clubs.png"),
@@ -76,13 +76,13 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_diamonds.png"), new ImageIcon("src/images/knight_of_diamonds.png"),
 			new ImageIcon("src/images/queen_of_diamonds.png"), new ImageIcon("src/images/king_of_diamonds.png") };
 
-	private static ImageIcon[] heartCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_hearts.png"),
+	private static ImageIcon[] heartCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_Hearts.png"),
 			new ImageIcon("src/images/2_of_hearts.png"), new ImageIcon("src/images/3_of_hearts.png"),
 			new ImageIcon("src/images/4_of_hearts.png"), new ImageIcon("src/images/5_of_hearts.png"),
 			new ImageIcon("src/images/6_of_hearts.png"), new ImageIcon("src/images/7_of_hearts.png"),
 			new ImageIcon("src/images/8_of_hearts.png"), new ImageIcon("src/images/9_of_hearts.png"),
 			new ImageIcon("src/images/10_of_hearts.png"), new ImageIcon("src/images/knight_of_hearts.png"),
-			new ImageIcon("src/images/queen_of_hearts.png"), new ImageIcon("src/images/ace_of_king.png") };
+			new ImageIcon("src/images/queen_of_hearts.png"), new ImageIcon("src/images/king_of_hearts.png") };
 
 	public Gui() {
 		super("VideoPoker");
@@ -235,6 +235,8 @@ public class Gui extends JFrame implements ActionListener {
 			disableRadiobuttons();
 			videopoker.start();
 			setIconsForHand(videopoker.getHand(0));
+			setTextMessage("");
+			
 		} else if (e.getSource() == swap) {
 			// TODO: lägg in anrop till swapmetoden här
 			resetCheckboxes();
@@ -248,17 +250,17 @@ public class Gui extends JFrame implements ActionListener {
 			// TODO: lägg in anrop till holdmetoden här
 			start.setEnabled(true);
 			hold.setEnabled(false);
+			swap.setEnabled(false);
 			disableCheckboxes();
 			swapCount = 0;
 			enableRadiobuttons();
 			videopoker.hold();
+			resetCardIcons();
 		}
 		// Här väljer vi hur många swaps man får göra
 		for (int i = 0; i < 2; i++) {
 			if (radiobuttons[i].isSelected())
 				nrOfSwaps = i + 1;
-//			String s = "" + nrOfSwaps;
-//			textMessageArea.setText(s);
 		}
 	}
 
@@ -323,6 +325,12 @@ public class Gui extends JFrame implements ActionListener {
 	private void disableRadiobuttons() {
 		for (int i = 0; i < 2; i++) {
 			radiobuttons[i].setEnabled(false);
+		}
+	}
+	
+	public void resetCardIcons() {
+		for(int i = 0; i < cards.length; i++) {
+			cards[i].setIcon(back);
 		}
 	}
 }
