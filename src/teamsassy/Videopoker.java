@@ -40,11 +40,23 @@ public class Videopoker {
 		}
 
 		deck.shuffle();
-		for (int i = 0; i < hands.length; ++i) {
-			for (int j = 0; j < 5; ++j) {
-				hands[i].addCard(deck.drawCard());
-			}
-		}
+		Card card1 = new Card(1, Suit.HEARTS);
+		Card card2 = new Card(1, Suit.HEARTS);
+		Card card3 = new Card(1, Suit.CLUBS);
+		Card card4 = new Card(2, Suit.SPADES);
+		Card card5 = new Card(2, Suit.CLUBS);
+		
+//		for (int i = 0; i < hands.length; ++i) {
+//			for (int j = 0; j < 5; ++j) {
+//				hands[i].addCard(deck.drawCard());
+//			}
+//		}
+		hands[0].addCard(card1);
+		hands[0].addCard(card2);
+		hands[0].addCard(card3);
+		hands[0].addCard(card4);
+		hands[0].addCard(card5);
+
 
 		player = 0;
 	}

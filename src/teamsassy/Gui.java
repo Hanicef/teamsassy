@@ -257,8 +257,8 @@ public class Gui extends JFrame implements ActionListener {
 		for (int i = 0; i < 2; i++) {
 			if (radiobuttons[i].isSelected())
 				nrOfSwaps = i + 1;
-			String s = "" + nrOfSwaps;
-			textMessageArea.setText(s);
+//			String s = "" + nrOfSwaps;
+//			textMessageArea.setText(s);
 		}
 	}
 
