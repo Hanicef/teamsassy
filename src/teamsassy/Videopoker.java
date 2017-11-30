@@ -148,6 +148,11 @@ public class Videopoker {
 			Gui.setTextMessage("30 points!");
 		}
 		System.out.println("Hejdå!");
+		if(s == 0) {
+			s = -10;
+			Gui.setTextMessage("Noll poäng");
+			Gui.setTextMessage("-10 points!");
+		}
 		return s;
 	}
 }
