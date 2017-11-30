@@ -99,27 +99,32 @@ public class Videopoker {
 			if (values[m] == 2) {
 				s = 1;
 				Gui.setTextMessage("Du fick par");
+				Gui.setTextMessage("2 points!");
 			}
 			// triss
 			else if (values[m] == 3) {
 				s = 3;
 				Gui.setTextMessage("Du fick triss");
+				Gui.setTextMessage("6 points!");
 			}
 			// fyrtal
 			else if (values[m] == 4) {
 				s = 8;
 				Gui.setTextMessage("Du fick fyrtal");
+				Gui.setTextMessage("10 points!");
 			}
 			for (int i = 0; i < 13; i++) {
 				// tvåpar
 				if (values[m] == 2 && values[i] == 2 && i != m) {
 					s = 2;
 					Gui.setTextMessage("Du fick Tv� par");
+					Gui.setTextMessage("10 points!");
 				}
 				// kåk
 				if (values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m) {
 					s = 6;
 					Gui.setTextMessage("Du fick K�k");
+					Gui.setTextMessage("15 points!");
 
 				}
 
@@ -133,6 +138,7 @@ public class Videopoker {
 				s = 11;
 				System.out.println(handen[0] + " Hej");
 				Gui.setTextMessage("Du fick F�rgstege");
+				Gui.setTextMessage("25 points!");
 
 			}
 		}
@@ -141,8 +147,9 @@ public class Videopoker {
 				&& flush == true) {
 			s = 20;
 			Gui.setTextMessage("Du fick RoyalFlush");
+			Gui.setTextMessage("30 points!");
 		}
-		System.out.println();
+		System.out.println("Hejdå!");
 		return s;
 	}
 }
