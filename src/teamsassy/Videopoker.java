@@ -20,7 +20,7 @@ public class Videopoker {
 		player = 0;
 	}
 
-	public void hold() {
+	public Hand hold() {
 		Hand dealer;
 		player++;
 
@@ -30,8 +30,12 @@ public class Videopoker {
 			for (int i = 0; i < 5; ++i) {
 				dealer.addCard(deck.drawCard());
 			}
+
+                        return dealer;
 		}
-		score(hands[0]);
+
+                // If NULL is returned, keep game going.
+                return null;
 	}
 
 	public void start() {
