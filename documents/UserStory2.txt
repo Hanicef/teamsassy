@@ -1,0 +1,39 @@
+Som en användare vill jag kunna satsa pengar för att uppnå ett
+större moment av spänning 
+
+En satsningsklass
+
+En metod för att beräkna hur mycket du har vunnit
+behöver få input av användare för att bestämma hur mycket hen vill satsa
+beräkna vad man vinner? Hur, behöver kolla på det
+
+
+
+
+Hitta på en egentabell för satsningen
+Royal flush - 30 points
+Färgstege - 25 points
+fyrtal - 10 points
+kåk - 15 points
+stege 
+färg
+triss - 6 points
+tvåpar - 10 points
+ettpar - 2 points
+
+inget - -10 points
+
+det man får i poäng kan få i - eller plus på potten man har lagt in?
+
+klass
+int inmatning
+int points
+int newpot
+
+newpot = inmatning + points;
+
+
+skapade betting som två metoder i videopokerklassen.
+Den tar poängen och lägger det till moneyleft
+Startar man om spelet så startar även vad man har kvar om
+Jag tänker att klassen som ska spara tilgångarna löser att man kan starta om spelet med de resultatet man fick
