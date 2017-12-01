@@ -11,7 +11,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	private int nrOfSwaps = 1;
 	private int swapCount = 0;
-	//private static int bet = 0;
+	private static int lastbet = 0;
 
 	private JPanel buttonPanel = new JPanel();
 	private JButton swap = new JButton("Swap");
@@ -289,11 +289,17 @@ public class Gui extends JFrame implements ActionListener {
 	// Sätter hur mycket pengar som finns efter att man spelar en runda
 	public static void setMoneyLeft(int moneyLeft) {
 		Gui.moneyLeft.setText(Integer.toString(moneyLeft));
+		lastbet = moneyLeft;
 	}
 
 	// Hämtar ut vad användaren vill betta
 	public static int getBet() {
+		try {
+			
 		return Integer.parseInt(Gui.betField.getText());
+		}catch(NumberFormatException e) {
+			return lastbet;
+		}
 	}
 
 	private void setIconsForHand(Hand hand) {
