@@ -84,11 +84,14 @@ public class Videopoker {
 			handen[x] = hand.getCards()[x].getValue();
 			values[hand.getCards()[x].getValue()]++;
 
+//			Färg
 			if (suits[0] == hand.getCards()[x].getSuit())
 				sameSuit++;
 			if (sameSuit == 5) {
 				flush = true;
 				s = 5;
+				Gui.setTextMessage("Du fick par");
+				Gui.setTextMessage("2 points!");
 
 			}
 		}
@@ -129,8 +132,12 @@ public class Videopoker {
 			}
 		}
 		Arrays.sort(handen);
+//		stege
 		if (handen[0] == (handen[1] - 1) && (handen[2] - 2) == (handen[3] - 3) && (handen[3] - 3) == (handen[4] - 4)) {
 			s = 4;
+			Gui.setTextMessage("Du fick stege");
+			Gui.setTextMessage("10 points!");
+			
 			// Färgstege
 			if (flush == true) {
 				s = 11;
@@ -147,12 +154,12 @@ public class Videopoker {
 			Gui.setTextMessage("Du fick RoyalFlush");
 			Gui.setTextMessage("30 points!");
 		}
-		System.out.println("Hejdå!");
 		if(s == 0) {
 			s = -10;
 			Gui.setTextMessage("Noll poäng");
 			Gui.setTextMessage("-10 points!");
 		}
+		System.out.println("Hejdå!");
 		return s;
 	}
 }
