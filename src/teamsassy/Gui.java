@@ -3,6 +3,7 @@ package teamsassy;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.*;
 
 public class Gui extends JFrame implements ActionListener {
 
@@ -362,21 +363,29 @@ public class Gui extends JFrame implements ActionListener {
 
         public void save() {
                 File file = new File("save.game");
-                FileOutputStream fs = new FileOutputStream(file);
-                ObjectOutputStream os = new ObjectOutputStream(fs);
-
-                os.writeObject(videopoker);
-                os.close();
-                fs.close();
+                try {
+                    FileOutputStream fs = new FileOutputStream(file);
+                    ObjectOutputStream os = new ObjectOutputStream(fs);
+    
+                    os.writeObject(videopoker);
+                    os.close();
+                    fs.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
 
         public void load() {
                 File file = new File("save.game");
-                FileOutputStream fs = new FileInputStream(file);
-                ObjectOutputStream os = new ObjectInputStream(fs);
+                try {
+                FileInputStream fs = new FileInputStream(file);
+                ObjectInputStream os = new ObjectInputStream(fs);
 
                 videopoker = (Videopoker)os.readObject();
                 os.close();
                 fs.close();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
         }
 }
