@@ -353,4 +353,24 @@ public class Gui extends JFrame implements ActionListener {
 			cards[i].setIcon(back);
 		}
 	}
+
+        public void save() {
+                File file = new File("save.game");
+                FileOutputStream fs = new FileOutputStream(file);
+                ObjectOutputStream os = new ObjectOutputStream(fs);
+
+                os.writeObject(videopoker);
+                os.close();
+                fs.close();
+        }
+
+        public void load() {
+                File file = new File("save.game");
+                FileOutputStream fs = new FileInputStream(file);
+                ObjectOutputStream os = new ObjectInputStream(fs);
+
+                videopoker = (Videopoker)os.readObject();
+                os.close();
+                fs.close();
+        }
 }
