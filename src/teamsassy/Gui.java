@@ -11,7 +11,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	private int nrOfSwaps = 1;
 	private int swapCount = 0;
-	private static int bet = 0;
+	//private static int bet = 0;
 
 	private JPanel buttonPanel = new JPanel();
 	private JButton swap = new JButton("Swap");
@@ -255,8 +255,7 @@ public class Gui extends JFrame implements ActionListener {
 		else if (e.getSource() == betField) {
 			String s = betField.getText();
 			try {
-				bet = Integer.parseInt(s);
-				setTextMessage("Du bettar " + bet);
+				setTextMessage("Du bettar " + s);
 			} catch (Exception e1) {
 				setTextMessage("Ogiltig inmatning");
 			}
@@ -294,7 +293,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	// Hämtar ut vad användaren vill betta
 	public static int getBet() {
-		return bet;
+		return Integer.parseInt(Gui.betField.getText());
 	}
 
 	private void setIconsForHand(Hand hand) {
