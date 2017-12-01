@@ -35,6 +35,7 @@ public class Videopoker {
 		}
 
                 // If NULL is returned, keep game going.
+                score(hand[player]);
                 return null;
 	}
 
