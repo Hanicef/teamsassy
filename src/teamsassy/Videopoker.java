@@ -8,6 +8,11 @@ public class Videopoker {
 	private Deck deck;
 	private Hand[] hands;
 	private int player;
+//	private int bet = 100;
+//	private BetMoney bet;
+	private int inmatning;
+	private int points;
+	private int newPot;
 
 	public Videopoker(int playercnt) {
 		hands = new Hand[playercnt];
@@ -32,6 +37,7 @@ public class Videopoker {
 			}
 		}
 		score(hands[0]);
+		newPot();
 	}
 
 	public void start() {
@@ -47,7 +53,10 @@ public class Videopoker {
 				hands[i].addCard(deck.drawCard());
 			}
 		}
-
+//		bet  = new BetMoney();
+		setBet();
+		
+		
 		player = 0;
 	}
 
@@ -98,18 +107,21 @@ public class Videopoker {
 				s = 1;
 				Gui.setTextMessage("Du fick par");
 				Gui.setTextMessage("2 points!");
+				
 			}
 			// triss
 			else if (values[m] == 3) {
 				s = 3;
 				Gui.setTextMessage("Du fick triss");
 				Gui.setTextMessage("6 points!");
+				
 			}
 			// fyrtal
 			else if (values[m] == 4) {
 				s = 8;
 				Gui.setTextMessage("Du fick fyrtal");
 				Gui.setTextMessage("10 points!");
+				
 			}
 			for (int i = 0; i < 13; i++) {
 				// tvåpar
@@ -117,12 +129,14 @@ public class Videopoker {
 					s = 2;
 					Gui.setTextMessage("Du fick Tv� par");
 					Gui.setTextMessage("10 points!");
+					
 				}
 				// kåk
 				if (values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m) {
 					s = 6;
 					Gui.setTextMessage("Du fick K�k");
 					Gui.setTextMessage("15 points!");
+					
 
 				}
 
@@ -137,6 +151,7 @@ public class Videopoker {
 				System.out.println(handen[0] + " Hej");
 				Gui.setTextMessage("Du fick F�rgstege");
 				Gui.setTextMessage("25 points!");
+				
 
 			}
 		}
@@ -146,13 +161,28 @@ public class Videopoker {
 			s = 20;
 			Gui.setTextMessage("Du fick RoyalFlush");
 			Gui.setTextMessage("30 points!");
+			
 		}
 		System.out.println("Hejdå!");
 		if(s == 0) {
 			s = -10;
 			Gui.setTextMessage("Noll poäng");
 			Gui.setTextMessage("-10 points!");
+			
 		}
 		return s;
+	}
+	public void setBet() {
+		inmatning = Gui.getBet();
+		Gui.setMoneyLeft(inmatning);
+	}
+	public int newPot() {
+//		inmatning = Gui.getBet();
+//		Gui.setMoneyLeft(inmatning);
+//		H�mta in po�ngen
+		points = score(hands[0]);
+		newPot = inmatning + points;
+		Gui.setMoneyLeft(newPot);
+		return newPot;
 	}
 }

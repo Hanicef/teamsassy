@@ -44,7 +44,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	private JPanel textMessagePanel = new JPanel();
 	private static JTextArea textMessageArea = new JTextArea(2, 20);
-	private static JTextArea moneyLeft = new JTextArea("100", 1, 4);
+	private static JTextArea moneyLeft = new JTextArea("0", 1, 4);
 	private JComponent[] textAreas = new JTextArea[] { new JTextArea("money left:", 1, 10),
 			new JTextArea("bet:", 1, 4) };
 	private static JTextField betField = new JTextField(4);
