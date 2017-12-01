@@ -9,8 +9,8 @@ public class Videopoker implements Serializable {
 	private Deck deck;
 	private Hand[] hands;
 	private int player;
-//	private int bet = 100;
-//	private BetMoney bet;
+	// private int bet = 100;
+	// private BetMoney bet;
 	private int inmatning;
 	private int points;
 	private int newPot;
@@ -40,10 +40,9 @@ public class Videopoker implements Serializable {
 		score(hands[0]);
 		newPot();
 
-
-                // If NULL is returned, keep game going.
-                score(hands[player++]);
-                return dealer;
+		// If NULL is returned, keep game going.
+		score(hands[player++]);
+		return dealer;
 
 	}
 
@@ -60,10 +59,9 @@ public class Videopoker implements Serializable {
 				hands[i].addCard(deck.drawCard());
 			}
 		}
-//		bet  = new BetMoney();
+		// bet = new BetMoney();
 		setBet();
-		
-		
+
 		player = 0;
 	}
 
@@ -101,15 +99,13 @@ public class Videopoker implements Serializable {
 			handen[x] = hand.getCards()[x].getValue();
 			values[hand.getCards()[x].getValue()]++;
 
-//			Färg
+			// Färg
 			if (suits[0] == hand.getCards()[x].getSuit())
 				sameSuit++;
 			if (sameSuit == 5) {
 				flush = true;
 				s = 5;
 				pH = "färg";
-//				Gui.setTextMessage("Du fick par");
-//				Gui.setTextMessage("2 points!");
 
 			}
 		}
@@ -118,12 +114,6 @@ public class Videopoker implements Serializable {
 			if (values[m] == 2) {
 				s = 1;
 				pH = "par";
-//				Gui.setTextMessage("Du fick par");
-//				Gui.setTextMessage("2 points!");
-				
-
-//				Gui.setTextMessage("Du fick par");
-//				Gui.setTextMessage("2 points!");
 
 			}
 			// triss
@@ -131,25 +121,11 @@ public class Videopoker implements Serializable {
 				s = 3;
 				pH = "triss";
 
-//				Gui.setTextMessage("Du fick triss");
-//				Gui.setTextMessage("6 points!");
-				
-
-//				Gui.setTextMessage("Du fick triss");
-//				Gui.setTextMessage("6 points!");
-
 			}
 			// fyrtal
 			else if (values[m] == 4) {
 				s = 8;
 				pH = "fyrtal";
-
-//				Gui.setTextMessage("Du fick fyrtal");
-//				Gui.setTextMessage("10 points!");
-				
-
-//				Gui.setTextMessage("Du fick fyrtal");
-//				Gui.setTextMessage("10 points!");
 
 			}
 			for (int i = 0; i < 13; i++) {
@@ -157,88 +133,50 @@ public class Videopoker implements Serializable {
 				if (values[m] == 2 && values[i] == 2 && i != m) {
 					s = 2;
 					pH = "två par";
-
-//					Gui.setTextMessage("Du fick Tv� par");
-//					Gui.setTextMessage("10 points!");
-					
-
-//					Gui.setTextMessage("Du fick Tv� par");
-//					Gui.setTextMessage("10 points!");
-
 				}
 				// kåk
 				if (values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m) {
 					s = 6;
 					pH = "kåk";
-
-//					Gui.setTextMessage("Du fick K�k");
-//					Gui.setTextMessage("15 points!");
-					
-
-//					Gui.setTextMessage("Du fick K�k");
-//					Gui.setTextMessage("15 points!");
-
-
 				}
 
 			}
 		}
 		Arrays.sort(handen);
-//		stege
+		// stege
 		if (handen[0] == (handen[1] - 1) && (handen[2] - 2) == (handen[3] - 3) && (handen[3] - 3) == (handen[4] - 4)) {
 			s = 4;
 			pH = "stege";
-//			Gui.setTextMessage("Du fick stege");
-//			Gui.setTextMessage("10 points!");
-			
 			// Färgstege
 			if (flush == true) {
 				s = 11;
 				pH = "färgstege";
-
-//				System.out.println(handen[0] + " Hej");
-//				Gui.setTextMessage("Du fick F�rgstege");
-//				Gui.setTextMessage("25 points!");
-				
-
 			}
 		}
 
-		
 		// Royal Straight Flush och Royal Straight
 		if (handen[0] == 1 && handen[1] == 10 && handen[2] == 11 && handen[3] == 12 && handen[4] == 13) {
 			s = (flush == true ? 20 : 4);
 			pH = (flush == true ? "royal straight flush" : "royal straight");
-//			Gui.setTextMessage("Du fick RoyalStraightFlush");
-//			Gui.setTextMessage("30 points!");
-
 		}
-		if(s == 0) {
-
-			s = -10;
-			pH = "ingen hand";
-//			Gui.setTextMessage("Noll poäng");
-//			Gui.setTextMessage("-10 points!");
-			
-
+		if (s == 0) {
 			s = -5;
-//			Gui.setTextMessage("Noll poäng");
-//			Gui.setTextMessage("-10 points!");
-
+			pH = "ingen hand";
 		}
 		System.out.println(s * 2);
 		Gui.setTextMessage((s * 2) + " points! Du fick " + pH);
-		return s *2;
+		return s * 2;
 	}
 
 	public void setBet() {
 		inmatning = Gui.getBet();
 		Gui.setMoneyLeft(inmatning);
 	}
+
 	public int newPot() {
-//		inmatning = Gui.getBet();
-//		Gui.setMoneyLeft(inmatning);
-//		H�mta in po�ngen
+		// inmatning = Gui.getBet();
+		// Gui.setMoneyLeft(inmatning);
+		// H�mta in po�ngen
 		points = score(hands[0]);
 		newPot = inmatning + points;
 		Gui.setMoneyLeft(newPot);
