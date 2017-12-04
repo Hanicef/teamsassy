@@ -165,7 +165,7 @@ public class Videopoker implements Serializable {
 	}
 
 	public void setBet() {
-		inmatning = Gui.getBet();
+		inmatning += Gui.getBet();
 		Gui.setMoneyLeft(inmatning);
 	}
 

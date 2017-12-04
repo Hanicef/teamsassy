@@ -230,10 +230,10 @@ public class Gui extends JFrame implements ActionListener {
 		if (e.getSource() == start) {
 			// TODO: lägg in anrop till startmetoden här
 			if (getBet() > 0) {
+				betField.setEnabled(false);
 				start.setEnabled(false);
 				swap.setEnabled(true);
 				hold.setEnabled(true);
-				betField.setEnabled(false);
 				enableCheckboxes();
 				disableRadiobuttons();
 				videopoker.start();
@@ -318,8 +318,7 @@ public class Gui extends JFrame implements ActionListener {
 	// Hämtar ut vad användaren vill betta
 	public static int getBet() {
 		try {
-			
-		return Integer.parseInt(Gui.betField.getText());
+			return Integer.parseInt(Gui.betField.getText());
 		}catch(NumberFormatException e) {
 			return Videopoker.lastbet;
 		}
