@@ -38,6 +38,8 @@ public class Gui extends JFrame implements ActionListener {
 
 	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
 			new JLabel() };
+	
+	private Color sassyColor = new Color(55, 9, 84); 
 
 	// sökvägar för kortikonerna
 	private ImageIcon back = new ImageIcon("src/images/back.png");
@@ -92,6 +94,7 @@ public class Gui extends JFrame implements ActionListener {
 		hold.setPreferredSize(buttonDim);
 		hold.addActionListener(this);
 		hold.setEnabled(false);
+		buttonPanel.setBackground(sassyColor);
 		buttonPanel.setLayout(new GridBagLayout());
 		GridBagConstraints buttonPanelGBC = new GridBagConstraints();
 		buttonPanelGBC.insets = new Insets(0, 15, 0, 15);
@@ -113,6 +116,7 @@ public class Gui extends JFrame implements ActionListener {
 		radiobuttons[1].addActionListener(this);
 
 		// Ställa in och adda checkboxes
+		checkboxPanel.setBackground(sassyColor);
 		checkboxPanel.setLayout(new GridBagLayout());
 		GridBagConstraints checkboxPanelGBC = new GridBagConstraints();
 		checkboxPanelGBC.insets = new Insets(0, 38, 0, 38);
@@ -143,6 +147,7 @@ public class Gui extends JFrame implements ActionListener {
 		betField.addActionListener(this);
 
 		// Adda textfälten till textpanelen
+		textMessagePanel.setBackground(sassyColor);
 		textMessagePanel.setPreferredSize(new Dimension(550, 125));
 		textMessagePanel.setLayout(new GridBagLayout());
 		GridBagConstraints textMessagePanelGBC = new GridBagConstraints();
@@ -181,6 +186,7 @@ public class Gui extends JFrame implements ActionListener {
 		}
 
 		// Adda korten i kortpanelen
+		cardPanel.setBackground(sassyColor);
 		cardPanel.setLayout(new GridBagLayout());
 		cardPanel.setPreferredSize(new Dimension(550, 150));
 		GridBagConstraints cardPanelGBC = new GridBagConstraints();
@@ -194,7 +200,7 @@ public class Gui extends JFrame implements ActionListener {
 		// set layout för frame och adda komponenter
 		setLayout(new GridBagLayout());
 		GridBagConstraints frameGBC = new GridBagConstraints();
-		frameGBC.insets = new Insets(10, 0, 10, 0);
+		frameGBC.insets = new Insets(5, 0, 5, 0);
 		// Adda text i framen
 		frameGBC.gridx = 1;
 		frameGBC.gridy = 1;
@@ -221,7 +227,7 @@ public class Gui extends JFrame implements ActionListener {
 		add(buttonPanel, frameGBC);
 
 		// inställningar för Framen
-		// getContentPane().setBackground(Color.DARK_GRAY);
+		getContentPane().setBackground(sassyColor);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
