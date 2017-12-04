@@ -90,17 +90,18 @@ public class Videopoker implements Serializable {
 		boolean flush = false;
 		int[] handen = new int[5];
 		Suit[] suits = new Suit[5];
-
+//		Values[] har 14 hållare som börjar som alla har en int med värdet 0
 		for (int m = 1; m <= 13; m++) {
 			values[m] = 0;
 		}
+//		handens värdes motsvarande plats i values[] arrayen ökar med 1 för 
+//		varje gång kortet finns i handen
 		for (int x = 0; x <= 4; x++) {
-			suits[x] = hand.getCards()[x].getSuit();
 			handen[x] = hand.getCards()[x].getValue();
 			values[hand.getCards()[x].getValue()]++;
 
 			// Färg
-			if (suits[0] == hand.getCards()[x].getSuit())
+			if (hand.getCards()[0].getSuit() == hand.getCards()[x].getSuit())
 				sameSuit++;
 			if (sameSuit == 5) {
 				flush = true;
@@ -109,6 +110,7 @@ public class Videopoker implements Serializable {
 
 			}
 		}
+//		kollar hur många kort av varje värde som finns
 		for (int m = 0; m <= 13; m++) {
 			// par
 			if (values[m] == 2) {
@@ -159,6 +161,7 @@ public class Videopoker implements Serializable {
 			s = (flush == true ? 20 : 4);
 			pH = (flush == true ? "royal straight flush" : "royal straight");
 		}
+//		ingen hand
 		if (s == 0) {
 			s = -5;
 			pH = "ingen hand";

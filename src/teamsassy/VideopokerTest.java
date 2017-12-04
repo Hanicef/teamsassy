@@ -25,7 +25,7 @@ class VideopokerTest {
 		  h.addCard(new Card(4, Suit.HEARTS));
 		  h.addCard(new Card(3, Suit.HEARTS));
 		  
-		   assertEquals(1, p.score(h));
+		   assertEquals(1 * 2, p.score(h));
 		   
 	}
 	@Test
@@ -37,7 +37,7 @@ class VideopokerTest {
 		h.addCard(new Card(1, Suit.HEARTS));
 		h.addCard(new Card(3, Suit.HEARTS));
 		
-		assertEquals(1, p.score(h));
+		assertEquals(1 * 2, p.score(h));
 		
 	}
 	@Test
@@ -49,7 +49,7 @@ class VideopokerTest {
 		h.addCard(new Card(3, Suit.HEARTS));
 		h.addCard(new Card(4, Suit.HEARTS));
 		
-		assertEquals(2, p.score(h));
+		assertEquals(2 * 2, p.score(h));
 		
 	}
 	@Test
@@ -61,7 +61,7 @@ class VideopokerTest {
 		h.addCard(new Card(1, Suit.HEARTS));
 		h.addCard(new Card(1, Suit.HEARTS));
 		
-		assertEquals(3, p.score(h));
+		assertEquals(3 * 2, p.score(h));
 		
 	}
 	@Test
@@ -73,7 +73,7 @@ class VideopokerTest {
 		h.addCard(new Card(1, Suit.HEARTS));
 		h.addCard(new Card(1, Suit.HEARTS));
 		
-		assertEquals(8, p.score(h));
+		assertEquals(8 * 2, p.score(h));
 		
 	}
 	@Test
@@ -85,7 +85,7 @@ class VideopokerTest {
 		h.addCard(new Card(5, Suit.HEARTS));
 		h.addCard(new Card(1, Suit.HEARTS));
 		
-		assertEquals(6, p.score(h));
+		assertEquals(6 * 2, p.score(h));
 		
 	}
 	@Test
@@ -97,7 +97,7 @@ class VideopokerTest {
 		h.addCard(new Card(5, Suit.HEARTS));
 		h.addCard(new Card(3, Suit.HEARTS));
 		
-		assertEquals(5, p.score(h));
+		assertEquals(5 * 2, p.score(h));
 		
 	}
 	@Test
@@ -109,7 +109,7 @@ class VideopokerTest {
 		h.addCard(new Card(5, Suit.HEARTS));
 		h.addCard(new Card(4, Suit.HEARTS));
 		
-		assertEquals(4, p.score(h));
+		assertEquals(4 * 2, p.score(h));
 		
 	}
 	@Test
@@ -121,7 +121,7 @@ class VideopokerTest {
 		h.addCard(new Card(5, Suit.HEARTS));
 		h.addCard(new Card(4, Suit.HEARTS));
 		
-		assertEquals(11, p.score(h));
+		assertEquals(11 * 2, p.score(h));
 		
 	}
 	@Test
@@ -133,7 +133,7 @@ class VideopokerTest {
 		h.addCard(new Card(13, Suit.HEARTS));
 		h.addCard(new Card(1, Suit.HEARTS));
 		
-		assertEquals(20, p.score(h));
+		assertEquals(20 * 2, p.score(h));
 		
 	}
 
