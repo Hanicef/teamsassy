@@ -27,28 +27,21 @@ public class Videopoker implements Serializable {
 	}
 
 	public Hand hold() {
-		Hand dealer = null;
 
-		if (player >= hands.length) {
-			dealer = new Hand();
-
-			for (int i = 0; i < 5; ++i) {
-				dealer.addCard(deck.drawCard());
-			}
-		}
-
-		score(hands[0]);
-		newPot();
-
-		// If NULL is returned, keep game going.
 		score(hands[player++]);
-		return dealer;
+		if (player >= hands.length) {
+                        // All players have finished their turns: end the game.
+                        newPot();
+                        return null;
+		}
+		return hands[player];
 
 	}
 
 	public void start() {
 		deck = new Deck();
 		for (int i = 0; i < hands.length; ++i) {
+                        // Clear out all hands; new cards will be given later.
 			hands[i].clear();
 		}
 
