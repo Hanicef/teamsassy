@@ -10,6 +10,9 @@ public class Gui extends JFrame implements ActionListener {
 	// Skapa massa variabler som behövs
 	Videopoker videopoker = new Videopoker(1);
 
+	public int nrOfSwaps = 1;
+	public int swapCount = 0;
+	public static int lastbet = 0;
 
 	private JPanel buttonPanel = new JPanel();
 	private JButton swap = new JButton("Swap");
@@ -249,7 +252,7 @@ public class Gui extends JFrame implements ActionListener {
 					c[4].isSelected(), };
 			videopoker.swapCards(mask);
 			setIconsForHand(videopoker.getHand(0));
-			videopoker.swapCount++;
+			swapCount++;
 			checkNrOfSwaps();
 
 		} else if (e.getSource() == hold) {
@@ -260,7 +263,7 @@ public class Gui extends JFrame implements ActionListener {
 			betField.setEnabled(true);
 			resetCheckboxes();
 			disableCheckboxes();
-			videopoker.swapCount = 0;
+			swapCount = 0;
 			enableRadiobuttons();
 			videopoker.hold();
 			resetCardIcons();
@@ -285,14 +288,14 @@ public class Gui extends JFrame implements ActionListener {
 		// Här väljer vi hur många swaps man får göra
 		for (int i = 0; i < 2; i++) {
 			if (radiobuttons[i].isSelected())
-				videopoker.nrOfSwaps = i + 1;
+				nrOfSwaps = i + 1;
 		}
 
 	}
 
 	private void checkNrOfSwaps() {
 		resetCheckboxes();
-		if (videopoker.nrOfSwaps == videopoker.swapCount) {
+		if (nrOfSwaps == swapCount) {
 			swap.setEnabled(false);
 			for(int i = 0; i < c.length; i++) {
 				c[i].setEnabled(false);
@@ -312,7 +315,7 @@ public class Gui extends JFrame implements ActionListener {
 	// Sätter hur mycket pengar som finns efter att man spelar en runda
 	public static void setMoneyLeft(int moneyLeft) {
 		Gui.moneyLeft.setText(Integer.toString(moneyLeft));
-		Videopoker.lastbet = moneyLeft;
+		lastbet = moneyLeft;
 	}
 
 	// Hämtar ut vad användaren vill betta
@@ -320,7 +323,7 @@ public class Gui extends JFrame implements ActionListener {
 		try {
 			return Integer.parseInt(Gui.betField.getText());
 		}catch(NumberFormatException e) {
-			return Videopoker.lastbet;
+			return lastbet;
 		}
 	}
 
@@ -385,12 +388,30 @@ public class Gui extends JFrame implements ActionListener {
         public void save() {
                 File file = new File("save.game");
                 try {
-                    FileOutputStream fs = new FileOutputStream(file);
-                    ObjectOutputStream os = new ObjectOutputStream(fs);
+                    DataOutputStream s = new DataOutputStream(new FileOutputStream(file));
+                    //ObjectOutputStream os = new ObjectOutputStream(fs);
     
-                    os.writeObject(videopoker);
-                    os.close();
-                    fs.close();
+                    //os.writeObject(videopoker);
+                    //os.close();
+
+                    videopoker.writeData(s);
+                    s.writeInt(nrOfSwaps);
+                    s.writeInt(swapCount);
+                    s.writeInt(lastbet);
+                    
+                    s.writeBoolean(start.isEnabled());
+                    s.writeBoolean(swap.isEnabled());
+                    s.writeBoolean(hold.isEnabled());
+                    
+                    s.writeBoolean(radiobuttons[0].isEnabled());
+                    s.writeBoolean(radiobuttons[1].isEnabled());
+                    for (int i = 0; i < 5; ++i) {
+                		s.writeBoolean(c[i].isSelected());
+                    }
+                    
+                    s.writeUTF(moneyLeft.getText());
+                    s.writeUTF(betField.getText());
+                    s.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -399,13 +420,32 @@ public class Gui extends JFrame implements ActionListener {
         public void load() {
                 File file = new File("save.game");
                 try {
-                FileInputStream fs = new FileInputStream(file);
-                ObjectInputStream os = new ObjectInputStream(fs);
+                   DataInputStream s = new DataInputStream(new FileInputStream(file));
+                   /*
+                   ObjectInputStream os = new ObjectInputStream(fs);
 
-                videopoker = (Videopoker)os.readObject();
-                os.close();
-                fs.close();
-                } catch (IOException | ClassNotFoundException e) {
+                   videopoker = (Videopoker)os.readObject();
+                   os.close();
+                   */
+                   videopoker.readData(s);
+                   nrOfSwaps = s.readInt();
+                   swapCount = s.readInt();
+                   lastbet = s.readInt();
+                   
+                   start.setEnabled(s.readBoolean());
+                   swap.setEnabled(s.readBoolean());
+                   hold.setEnabled(s.readBoolean());
+                   
+                   radiobuttons[0].setEnabled(s.readBoolean());
+                   radiobuttons[1].setEnabled(s.readBoolean());
+                   for (int i = 0; i < 5; ++i) {
+               		c[i].setSelected(s.readBoolean());
+                   }
+                   
+                   moneyLeft.setText(s.readUTF());
+                   betField.setText(s.readUTF());
+                   s.close();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
         }

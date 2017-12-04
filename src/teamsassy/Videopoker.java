@@ -1,7 +1,7 @@
 
 package teamsassy;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,9 +15,6 @@ public class Videopoker implements Serializable {
 	private int inmatning;
 	private int points;
 	private int newPot;
-	public int nrOfSwaps = 1;
-	public int swapCount = 0;
-	public static int lastbet = 0;
 
 	public Videopoker(int playercnt) {
 		hands = new Hand[playercnt];
@@ -187,4 +184,22 @@ public class Videopoker implements Serializable {
 		Gui.setMoneyLeft(newPot);
 		return newPot;
 	}
+
+        public void writeData(DataOutputStream s) throws IOException {
+                deck.writeData(s);
+                hands[0].writeData(s);
+                s.writeInt(player);
+                s.writeInt(inmatning);
+                s.writeInt(points);
+                s.writeInt(newPot);
+        }
+        
+        public void readData(DataInputStream s) throws IOException {
+            deck.readData(s);
+            hands[0].readData(s);
+            player = s.readInt();
+             inmatning = s.readInt();
+             points = s.readInt();
+             newPot = s.readInt();
+        }
 }
