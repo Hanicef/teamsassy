@@ -39,7 +39,7 @@ public class Gui extends JFrame implements ActionListener {
 	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
 			new JLabel() };
 	
-	private Color sassyColor = new Color(55, 9, 84); 
+	private Color sassyColor = Color.LIGHT_GRAY; //new Color(55, 9, 84); 
 
 	// sökvägar för kortikonerna
 	private ImageIcon back = new ImageIcon("src/images/back.png");
