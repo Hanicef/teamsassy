@@ -229,15 +229,19 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (e.getSource() == start) {
 			// TODO: lägg in anrop till startmetoden här
-			start.setEnabled(false);
-			swap.setEnabled(true);
-			hold.setEnabled(true);
-			betField.setEnabled(false);
-			enableCheckboxes();
-			disableRadiobuttons();
-			videopoker.start();
-			setIconsForHand(videopoker.getHand(0));
-			setTextMessage("");
+			if (getBet() > 0) {
+				start.setEnabled(false);
+				swap.setEnabled(true);
+				hold.setEnabled(true);
+				betField.setEnabled(false);
+				enableCheckboxes();
+				disableRadiobuttons();
+				videopoker.start();
+				setIconsForHand(videopoker.getHand(0));
+				setTextMessage("");
+			} else {
+				JOptionPane.showMessageDialog(this, "Du måste göra en insats först!");
+			}
 
 		} else if (e.getSource() == swap) {
 			// TODO: lägg in anrop till swapmetoden här
