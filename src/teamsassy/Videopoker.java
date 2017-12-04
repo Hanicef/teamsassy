@@ -55,7 +55,6 @@ public class Videopoker implements Serializable {
 				hands[i].addCard(deck.drawCard());
 			}
 		}
-		//setBet();
 
 		player = 0;
 	}
