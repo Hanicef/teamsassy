@@ -1,11 +1,12 @@
 package teamsassy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 //import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Deck {
+public class Deck implements Serializable {
 	private List<Card> cards;
 	
 	public Deck() {

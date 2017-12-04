@@ -10,9 +10,6 @@ public class Gui extends JFrame implements ActionListener {
 	// Skapa massa variabler som behövs
 	Videopoker videopoker = new Videopoker(1);
 
-	private int nrOfSwaps = 1;
-	private int swapCount = 0;
-	private static int lastbet = 0;
 
 	private JPanel buttonPanel = new JPanel();
 	private JButton swap = new JButton("Swap");
@@ -32,6 +29,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JComponent[] textAreas = new JTextArea[] { new JTextArea("money left:", 1, 10),
 			new JTextArea("bet:", 1, 4) };
 	private static JTextField betField = new JTextField(4);
+	private JButton[] saveAndLoad = new JButton[] { new JButton("SAVE"), new JButton ("LOAD") }; 
 
 	private JPanel cardPanel = new JPanel();
 
@@ -123,11 +121,15 @@ public class Gui extends JFrame implements ActionListener {
 			c[i].setEnabled(false);
 		}
 
-		// Ställ in och lägg till textAreas
+		// Ställ in och lägg till textAreas + load/save button
 		for (int i = 0; i < textAreas.length; i++) {
 			textAreas[i].setOpaque(false);
 			// textAreas[i].setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 			// textAreas[i].setFont(new Font("Helvetica", Font.BOLD, 12));
+		}
+		
+		for (int i = 0; i < saveAndLoad.length; i++) {
+			saveAndLoad[i].addActionListener(this);
 		}
 
 		moneyLeft.setOpaque(false);
@@ -137,7 +139,7 @@ public class Gui extends JFrame implements ActionListener {
 		betField.addActionListener(this);
 
 		// Adda textfälten till textpanelen
-		textMessagePanel.setPreferredSize(new Dimension(550, 100));
+		textMessagePanel.setPreferredSize(new Dimension(550, 125));
 		textMessagePanel.setLayout(new GridBagLayout());
 		GridBagConstraints textMessagePanelGBC = new GridBagConstraints();
 		textMessagePanelGBC.gridx = 1;
@@ -161,6 +163,13 @@ public class Gui extends JFrame implements ActionListener {
 
 		textMessagePanelGBC.gridx = 4;
 		textMessagePanel.add(betField, textMessagePanelGBC);
+		
+		textMessagePanelGBC.gridx = 3;
+		textMessagePanelGBC.gridy = 4;
+		for (int i = 0; i < saveAndLoad.length; i++) {
+			textMessagePanel.add(saveAndLoad[i], textMessagePanelGBC);
+			textMessagePanelGBC.gridx = 4;
+		}
 
 		// Adda ImageIcons till korten, default är baksidan av kortet
 		for (int i = 0; i < cards.length; i++) {
@@ -220,15 +229,19 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (e.getSource() == start) {
 			// TODO: lägg in anrop till startmetoden här
-			start.setEnabled(false);
-			swap.setEnabled(true);
-			hold.setEnabled(true);
-			betField.setEnabled(false);
-			enableCheckboxes();
-			disableRadiobuttons();
-			videopoker.start();
-			setIconsForHand(videopoker.getHand(0));
-			setTextMessage("");
+			if (getBet() > 0) {
+				betField.setEnabled(false);
+				start.setEnabled(false);
+				swap.setEnabled(true);
+				hold.setEnabled(true);
+				enableCheckboxes();
+				disableRadiobuttons();
+				videopoker.start();
+				setIconsForHand(videopoker.getHand(0));
+				setTextMessage("");
+			} else {
+				JOptionPane.showMessageDialog(this, "Du måste göra en insats först!");
+			}
 
 		} else if (e.getSource() == swap) {
 			// TODO: lägg in anrop till swapmetoden här
@@ -236,6 +249,7 @@ public class Gui extends JFrame implements ActionListener {
 					c[4].isSelected(), };
 			videopoker.swapCards(mask);
 			setIconsForHand(videopoker.getHand(0));
+			videopoker.swapCount++;
 			checkNrOfSwaps();
 
 		} else if (e.getSource() == hold) {
@@ -246,11 +260,17 @@ public class Gui extends JFrame implements ActionListener {
 			betField.setEnabled(true);
 			resetCheckboxes();
 			disableCheckboxes();
-			swapCount = 0;
+			videopoker.swapCount = 0;
 			enableRadiobuttons();
 			videopoker.hold();
 			resetCardIcons();
 			betField.setText("");
+		} else if(e.getSource() == saveAndLoad[0]) {
+			save();
+		}else if(e.getSource() == saveAndLoad[1]) {
+			load();
+			setIconsForHand(videopoker.getHand(0));
+			checkNrOfSwaps();
 		}
 		// tar hand om inmatningarna i betfield
 		else if (e.getSource() == betField) {
@@ -265,21 +285,23 @@ public class Gui extends JFrame implements ActionListener {
 		// Här väljer vi hur många swaps man får göra
 		for (int i = 0; i < 2; i++) {
 			if (radiobuttons[i].isSelected())
-				nrOfSwaps = i + 1;
+				videopoker.nrOfSwaps = i + 1;
 		}
 
 	}
 
 	private void checkNrOfSwaps() {
-		swapCount++;
-		if (nrOfSwaps == swapCount) {
-			resetCheckboxes();
+		resetCheckboxes();
+		if (videopoker.nrOfSwaps == videopoker.swapCount) {
 			swap.setEnabled(false);
 			for(int i = 0; i < c.length; i++) {
 				c[i].setEnabled(false);
 			}
 		} else {
-			resetCheckboxes();
+			swap.setEnabled(true);
+			for(int i = 0; i < c.length; i++) {
+				c[i].setEnabled(true);
+			}
 		}
 	}
 
@@ -290,16 +312,15 @@ public class Gui extends JFrame implements ActionListener {
 	// Sätter hur mycket pengar som finns efter att man spelar en runda
 	public static void setMoneyLeft(int moneyLeft) {
 		Gui.moneyLeft.setText(Integer.toString(moneyLeft));
-		lastbet = moneyLeft;
+		Videopoker.lastbet = moneyLeft;
 	}
 
 	// Hämtar ut vad användaren vill betta
 	public static int getBet() {
 		try {
-			
-		return Integer.parseInt(Gui.betField.getText());
+			return Integer.parseInt(Gui.betField.getText());
 		}catch(NumberFormatException e) {
-			return lastbet;
+			return Videopoker.lastbet;
 		}
 	}
 

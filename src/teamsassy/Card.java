@@ -1,6 +1,8 @@
 package teamsassy;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
 	private int value;
 	private Suit suit;
 	
