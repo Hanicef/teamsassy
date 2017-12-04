@@ -245,6 +245,7 @@ public class Gui extends JFrame implements ActionListener {
 					c[4].isSelected(), };
 			videopoker.swapCards(mask);
 			setIconsForHand(videopoker.getHand(0));
+			videopoker.swapCount++;
 			checkNrOfSwaps();
 
 		} else if (e.getSource() == hold) {
@@ -286,16 +287,18 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	private void checkNrOfSwaps() {
-		videopoker.swapCount++;
 		if (videopoker.nrOfSwaps == videopoker.swapCount) {
-			resetCheckboxes();
 			swap.setEnabled(false);
 			for(int i = 0; i < c.length; i++) {
 				c[i].setEnabled(false);
 			}
 		} else {
-			resetCheckboxes();
+			swap.setEnabled(true);
+			for(int i = 0; i < c.length; i++) {
+				c[i].setEnabled(true);
+			}
 		}
+		resetCheckboxes();
 	}
 
 	public static void setTextMessage(String text) {
