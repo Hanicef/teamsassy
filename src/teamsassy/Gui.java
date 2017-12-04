@@ -287,6 +287,7 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	private void checkNrOfSwaps() {
+		resetCheckboxes();
 		if (videopoker.nrOfSwaps == videopoker.swapCount) {
 			swap.setEnabled(false);
 			for(int i = 0; i < c.length; i++) {
@@ -298,7 +299,6 @@ public class Gui extends JFrame implements ActionListener {
 				c[i].setEnabled(true);
 			}
 		}
-		resetCheckboxes();
 	}
 
 	public static void setTextMessage(String text) {
