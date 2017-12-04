@@ -114,7 +114,7 @@ public class Gui extends JFrame implements ActionListener {
 		// Ställa in och adda checkboxes
 		checkboxPanel.setLayout(new GridBagLayout());
 		GridBagConstraints checkboxPanelGBC = new GridBagConstraints();
-		checkboxPanelGBC.insets = new Insets(0, 40, 0, 40);
+		checkboxPanelGBC.insets = new Insets(0, 38, 0, 38);
 		c = new JCheckBox[5];
 		for (int i = 0; i < c.length; ++i) {
 			c[i] = new JCheckBox();
