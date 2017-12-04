@@ -6,20 +6,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Videopoker implements Serializable {
+    // Game data.
 	private Deck deck;
 	private Hand[] hands;
 	private int player;
-	// private int bet = 100;
-	// private BetMoney bet;
+
+    // Betting info.
 	private int inmatning;
 	private int points;
 	private int newPot;
+	public int nrOfSwaps = 1;
+	public int swapCount = 0;
+	public static int lastbet = 0;
 
 	public Videopoker(int playercnt) {
 		hands = new Hand[playercnt];
 		deck = new Deck();
 
 		for (int i = 0; i < playercnt; ++i) {
+            // Initialize all hands.
 			hands[i] = new Hand();
 		}
 
@@ -27,28 +32,21 @@ public class Videopoker implements Serializable {
 	}
 
 	public Hand hold() {
-		Hand dealer = null;
 
-		if (player >= hands.length) {
-			dealer = new Hand();
-
-			for (int i = 0; i < 5; ++i) {
-				dealer.addCard(deck.drawCard());
-			}
-		}
-
-		score(hands[0]);
-		newPot();
-
-		// If NULL is returned, keep game going.
 		score(hands[player++]);
-		return dealer;
+		if (player >= hands.length) {
+            // All players have finished their turns: end the game.
+            newPot();
+            return null;
+		}
+		return hands[player];
 
 	}
 
 	public void start() {
 		deck = new Deck();
 		for (int i = 0; i < hands.length; ++i) {
+            // Clear out all hands; new cards will be given later.
 			hands[i].clear();
 		}
 
@@ -56,10 +54,10 @@ public class Videopoker implements Serializable {
 
 		for (int i = 0; i < hands.length; ++i) {
 			for (int j = 0; j < 5; ++j) {
+                // Assign 5 cards to each hand.
 				hands[i].addCard(deck.drawCard());
 			}
 		}
-		// bet = new BetMoney();
 		setBet();
 
 		player = 0;
@@ -69,11 +67,15 @@ public class Videopoker implements Serializable {
 		Card[] tempCards = hands[player].getCards();
 		for (int i = 0; i < 5; i++) {
 			if (cardMask[i]) {
+                // Check mask; if n'th boolean is true, swap that card.
 				tempCards[i] = deck.drawCard();
 			}
 		}
+
+        // Reset the hand.
 		hands[player].clear();
 		for (int i = 0; i < 5; i++) {
+            // Assign cards to the new hand.
 			hands[player].addCard(tempCards[i]);
 		}
 	}
@@ -172,7 +174,7 @@ public class Videopoker implements Serializable {
 	}
 
 	public void setBet() {
-		inmatning = Gui.getBet();
+		inmatning += Gui.getBet();
 		Gui.setMoneyLeft(inmatning);
 	}
 
