@@ -55,7 +55,7 @@ public class Videopoker implements Serializable {
 				hands[i].addCard(deck.drawCard());
 			}
 		}
-		setBet();
+		//setBet();
 
 		player = 0;
 	}
@@ -171,8 +171,8 @@ public class Videopoker implements Serializable {
 	}
 
 	public void setBet() {
-		inmatning += Gui.getBet();
-		Gui.setMoneyLeft(inmatning);
+		setInmatning(getInmatning() + Gui.getBet());
+		Gui.setMoneyLeft(getInmatning());
 	}
 
 	public int newPot() {
@@ -180,7 +180,8 @@ public class Videopoker implements Serializable {
 		// Gui.setMoneyLeft(inmatning);
 		// H�mta in po�ngen
 		points = score(hands[0]);
-		newPot = inmatning + points;
+		newPot = getInmatning() + points;
+		setInmatning(newPot);
 		Gui.setMoneyLeft(newPot);
 		return newPot;
 	}
@@ -189,7 +190,7 @@ public class Videopoker implements Serializable {
                 deck.writeData(s);
                 hands[0].writeData(s);
                 s.writeInt(player);
-                s.writeInt(inmatning);
+                s.writeInt(getInmatning());
                 s.writeInt(points);
                 s.writeInt(newPot);
         }
@@ -198,8 +199,16 @@ public class Videopoker implements Serializable {
             deck.readData(s);
             hands[0].readData(s);
             player = s.readInt();
-             inmatning = s.readInt();
+             setInmatning(s.readInt());
              points = s.readInt();
              newPot = s.readInt();
         }
+
+		public int getInmatning() {
+			return inmatning;
+		}
+
+		public void setInmatning(int inmatning) {
+			this.inmatning = inmatning;
+		}
 }

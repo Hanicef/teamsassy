@@ -32,13 +32,13 @@ public class Gui extends JFrame implements ActionListener {
 	private JComponent[] textAreas = new JTextArea[] { new JTextArea("money left:", 1, 10),
 			new JTextArea("bet:", 1, 4) };
 	private static JTextField betField = new JTextField(4);
-	private JButton[] saveAndLoad = new JButton[] { new JButton("SAVE"), new JButton ("LOAD") }; 
+	private JButton[] saveAndLoad = new JButton[] { new JButton("SAVE"), new JButton("LOAD") };
 
 	private JPanel cardPanel = new JPanel();
 
 	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
 			new JLabel() };
-	
+
 	// sökvägar för kortikonerna
 	private ImageIcon back = new ImageIcon("src/images/back.png");
 
@@ -74,6 +74,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/10_of_hearts.png"), new ImageIcon("src/images/knight_of_hearts.png"),
 			new ImageIcon("src/images/queen_of_hearts.png"), new ImageIcon("src/images/king_of_hearts.png") };
 
+	// konstruktor
 	public Gui() {
 		super("SassyPoker");
 		// Ställa in och adda knapparna
@@ -130,7 +131,7 @@ public class Gui extends JFrame implements ActionListener {
 			// textAreas[i].setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 			// textAreas[i].setFont(new Font("Helvetica", Font.BOLD, 12));
 		}
-		
+
 		for (int i = 0; i < saveAndLoad.length; i++) {
 			saveAndLoad[i].addActionListener(this);
 		}
@@ -166,7 +167,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		textMessagePanelGBC.gridx = 4;
 		textMessagePanel.add(betField, textMessagePanelGBC);
-		
+
 		textMessagePanelGBC.gridx = 3;
 		textMessagePanelGBC.gridy = 4;
 		for (int i = 0; i < saveAndLoad.length; i++) {
@@ -232,7 +233,9 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (e.getSource() == start) {
 			// TODO: lägg in anrop till startmetoden här
-			if (getBet() > 0) {
+			videopoker.setBet();
+			if (videopoker.getInmatning() > 0) {
+				betField.setText("");
 				betField.setEnabled(false);
 				start.setEnabled(false);
 				swap.setEnabled(true);
@@ -267,10 +270,9 @@ public class Gui extends JFrame implements ActionListener {
 			enableRadiobuttons();
 			videopoker.hold();
 			resetCardIcons();
-			betField.setText("");
-		} else if(e.getSource() == saveAndLoad[0]) {
+		} else if (e.getSource() == saveAndLoad[0]) {
 			save();
-		}else if(e.getSource() == saveAndLoad[1]) {
+		} else if (e.getSource() == saveAndLoad[1]) {
 			load();
 			setIconsForHand(videopoker.getHand(0));
 			checkNrOfSwaps();
@@ -297,12 +299,12 @@ public class Gui extends JFrame implements ActionListener {
 		resetCheckboxes();
 		if (nrOfSwaps == swapCount) {
 			swap.setEnabled(false);
-			for(int i = 0; i < c.length; i++) {
+			for (int i = 0; i < c.length; i++) {
 				c[i].setEnabled(false);
 			}
 		} else {
 			swap.setEnabled(true);
-			for(int i = 0; i < c.length; i++) {
+			for (int i = 0; i < c.length; i++) {
 				c[i].setEnabled(true);
 			}
 		}
@@ -312,19 +314,22 @@ public class Gui extends JFrame implements ActionListener {
 		textMessageArea.setText(text);
 	}
 
-	// Sätter hur mycket pengar som finns efter att man spelar en runda
+	// Sätter hur mycket pengar som finns efter att man spelat en runda
 	public static void setMoneyLeft(int moneyLeft) {
 		Gui.moneyLeft.setText(Integer.toString(moneyLeft));
-		lastbet = moneyLeft;
+		// lastbet = moneyLeft;
 	}
 
 	// Hämtar ut vad användaren vill betta
 	public static int getBet() {
-		try {
-			return Integer.parseInt(Gui.betField.getText());
-		}catch(NumberFormatException e) {
-			return lastbet;
-		}
+		if (betField.getText() != "") {
+			try {
+				return Integer.parseInt(Gui.betField.getText());
+			} catch (NumberFormatException e) {
+				return 0;
+				// return lastbet;
+			}
+		} return 0;
 	}
 
 	private void setIconsForHand(Hand hand) {
@@ -385,68 +390,67 @@ public class Gui extends JFrame implements ActionListener {
 		}
 	}
 
-        public void save() {
-                File file = new File("save.game");
-                try {
-                    DataOutputStream s = new DataOutputStream(new FileOutputStream(file));
-                    //ObjectOutputStream os = new ObjectOutputStream(fs);
-    
-                    //os.writeObject(videopoker);
-                    //os.close();
+	public void save() {
+		File file = new File("save.game");
+		try {
+			DataOutputStream s = new DataOutputStream(new FileOutputStream(file));
+			// ObjectOutputStream os = new ObjectOutputStream(fs);
 
-                    videopoker.writeData(s);
-                    s.writeInt(nrOfSwaps);
-                    s.writeInt(swapCount);
-                    s.writeInt(lastbet);
-                    
-                    s.writeBoolean(start.isEnabled());
-                    s.writeBoolean(swap.isEnabled());
-                    s.writeBoolean(hold.isEnabled());
-                    
-                    s.writeBoolean(radiobuttons[0].isEnabled());
-                    s.writeBoolean(radiobuttons[1].isEnabled());
-                    for (int i = 0; i < 5; ++i) {
-                		s.writeBoolean(c[i].isSelected());
-                    }
-                    
-                    s.writeUTF(moneyLeft.getText());
-                    s.writeUTF(betField.getText());
-                    s.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-        }
+			// os.writeObject(videopoker);
+			// os.close();
 
-        public void load() {
-                File file = new File("save.game");
-                try {
-                   DataInputStream s = new DataInputStream(new FileInputStream(file));
-                   /*
-                   ObjectInputStream os = new ObjectInputStream(fs);
+			videopoker.writeData(s);
+			s.writeInt(nrOfSwaps);
+			s.writeInt(swapCount);
+			s.writeInt(lastbet);
 
-                   videopoker = (Videopoker)os.readObject();
-                   os.close();
-                   */
-                   videopoker.readData(s);
-                   nrOfSwaps = s.readInt();
-                   swapCount = s.readInt();
-                   lastbet = s.readInt();
-                   
-                   start.setEnabled(s.readBoolean());
-                   swap.setEnabled(s.readBoolean());
-                   hold.setEnabled(s.readBoolean());
-                   
-                   radiobuttons[0].setEnabled(s.readBoolean());
-                   radiobuttons[1].setEnabled(s.readBoolean());
-                   for (int i = 0; i < 5; ++i) {
-               		c[i].setSelected(s.readBoolean());
-                   }
-                   
-                   moneyLeft.setText(s.readUTF());
-                   betField.setText(s.readUTF());
-                   s.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-        }
+			s.writeBoolean(start.isEnabled());
+			s.writeBoolean(swap.isEnabled());
+			s.writeBoolean(hold.isEnabled());
+
+			s.writeBoolean(radiobuttons[0].isEnabled());
+			s.writeBoolean(radiobuttons[1].isEnabled());
+			for (int i = 0; i < 5; ++i) {
+				s.writeBoolean(c[i].isSelected());
+			}
+
+			s.writeUTF(moneyLeft.getText());
+			s.writeUTF(betField.getText());
+			s.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void load() {
+		File file = new File("save.game");
+		try {
+			DataInputStream s = new DataInputStream(new FileInputStream(file));
+			/*
+			 * ObjectInputStream os = new ObjectInputStream(fs);
+			 * 
+			 * videopoker = (Videopoker)os.readObject(); os.close();
+			 */
+			videopoker.readData(s);
+			nrOfSwaps = s.readInt();
+			swapCount = s.readInt();
+			lastbet = s.readInt();
+
+			start.setEnabled(s.readBoolean());
+			swap.setEnabled(s.readBoolean());
+			hold.setEnabled(s.readBoolean());
+
+			radiobuttons[0].setEnabled(s.readBoolean());
+			radiobuttons[1].setEnabled(s.readBoolean());
+			for (int i = 0; i < 5; ++i) {
+				c[i].setSelected(s.readBoolean());
+			}
+
+			moneyLeft.setText(s.readUTF());
+			betField.setText(s.readUTF());
+			s.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
