@@ -72,7 +72,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/queen_of_hearts.png"), new ImageIcon("src/images/king_of_hearts.png") };
 
 	public Gui() {
-		super("VideoPoker");
+		super("SassyPoker");
 		// Ställa in och adda knapparna
 		Font buttonFont = new Font("Helvetica", Font.BOLD, 24);
 		Dimension buttonDim = new Dimension(120, 55);
@@ -135,7 +135,7 @@ public class Gui extends JFrame implements ActionListener {
 		moneyLeft.setOpaque(false);
 		textMessageArea.setOpaque(false);
 		textMessageArea.setFont(new Font("Helvetica", Font.BOLD, 18));
-		textMessageArea.setText("Starttext");
+		textMessageArea.setText("Place a bet");
 		betField.addActionListener(this);
 
 		// Adda textfälten till textpanelen
@@ -240,7 +240,7 @@ public class Gui extends JFrame implements ActionListener {
 				setIconsForHand(videopoker.getHand(0));
 				setTextMessage("");
 			} else {
-				JOptionPane.showMessageDialog(this, "Du måste göra en insats först!");
+				JOptionPane.showMessageDialog(this, "You have to place a bet!");
 			}
 
 		} else if (e.getSource() == swap) {
@@ -276,9 +276,9 @@ public class Gui extends JFrame implements ActionListener {
 		else if (e.getSource() == betField) {
 			String s = betField.getText();
 			try {
-				setTextMessage("Du bettar " + s);
+				setTextMessage("Your bet " + s);
 			} catch (Exception e1) {
-				setTextMessage("Ogiltig inmatning");
+				setTextMessage("Error!");
 			}
 		}
 

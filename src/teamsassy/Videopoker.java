@@ -85,7 +85,7 @@ public class Videopoker implements Serializable {
 	}
 
 	public int score(Hand hand) {
-		String pH = "inget";
+		String pH = "no hand";
 		int[] values = new int[14];
 		int sameSuit = 0;
 		int s = 0;
@@ -108,7 +108,7 @@ public class Videopoker implements Serializable {
 			if (sameSuit == 5) {
 				flush = true;
 				s = 5;
-				pH = "färg";
+				pH = "flush";
 
 			}
 		}
@@ -117,31 +117,31 @@ public class Videopoker implements Serializable {
 			// par
 			if (values[m] == 2) {
 				s = 1;
-				pH = "par";
+				pH = "pair";
 
 			}
 			// triss
 			else if (values[m] == 3) {
 				s = 3;
-				pH = "triss";
+				pH = "three of a kind";
 
 			}
 			// fyrtal
 			else if (values[m] == 4) {
 				s = 8;
-				pH = "fyrtal";
+				pH = "four of a kind";
 
 			}
 			for (int i = 0; i < 13; i++) {
 				// tvåpar
 				if (values[m] == 2 && values[i] == 2 && i != m) {
 					s = 2;
-					pH = "två par";
+					pH = "two pairs";
 				}
 				// kåk
 				if (values[m] == 3 && values[i] == 2 && i != m || values[i] == 3 && values[m] == 2 && i != m) {
 					s = 6;
-					pH = "kåk";
+					pH = "full house";
 				}
 
 			}
@@ -150,11 +150,11 @@ public class Videopoker implements Serializable {
 		// stege
 		if (handen[0] == (handen[1] - 1) && (handen[2] - 2) == (handen[3] - 3) && (handen[3] - 3) == (handen[4] - 4)) {
 			s = 4;
-			pH = "stege";
+			pH = "straight";
 			// Färgstege
 			if (flush == true) {
 				s = 11;
-				pH = "färgstege";
+				pH = "straight flush";
 			}
 		}
 
@@ -166,10 +166,10 @@ public class Videopoker implements Serializable {
 //		ingen hand
 		if (s == 0) {
 			s = -5;
-			pH = "ingen hand";
+			pH = "no hand";
 		}
 		System.out.println(s * 2);
-		Gui.setTextMessage((s * 2) + " points! Du fick " + pH);
+		Gui.setTextMessage((s * 2) + " points! You got " + pH);
 		return s * 2;
 	}
 
