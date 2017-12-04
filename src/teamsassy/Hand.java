@@ -1,10 +1,11 @@
 
 package teamsassy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hand {
+public class Hand implements Serializable {
 
    private List<Card> cards;
 

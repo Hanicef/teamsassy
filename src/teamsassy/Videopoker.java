@@ -14,6 +14,9 @@ public class Videopoker implements Serializable {
 	private int inmatning;
 	private int points;
 	private int newPot;
+	public int nrOfSwaps = 1;
+	public int swapCount = 0;
+	public static int lastbet = 0;
 
 	public Videopoker(int playercnt) {
 		hands = new Hand[playercnt];
