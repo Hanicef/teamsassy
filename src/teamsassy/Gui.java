@@ -44,7 +44,7 @@ public class Gui extends JFrame implements ActionListener {
 	private Color sassyColor = Color.LIGHT_GRAY; // new Color(55, 9, 84);
 
 	// sökvägar för kortikonerna
-	private ImageIcon back = new ImageIcon("src/images/back.png");
+	private ImageIcon back = new ImageIcon("src/images/Back.png");
 
 	private static ImageIcon[] spadeCards = new ImageIcon[] { new ImageIcon("src/images/ace_of_spades.png"),
 			new ImageIcon("src/images/2_of_spades.png"), new ImageIcon("src/images/3_of_spades.png"),
