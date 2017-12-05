@@ -1,8 +1,5 @@
 package teamsassy;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -31,7 +28,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-<<<<<<< Updated upstream
+
  public class Gui extends JFrame implements ActionListener {
 
  	// Skapa massa variabler som behövs
@@ -537,10 +534,10 @@ import javax.swing.JTextField;
  		try {
  		DataInputStream s = new DataInputStream(new FileInputStream(file));
  			/*
- +			 * ObjectInputStream os = new ObjectInputStream(fs);
- +			 *
- +			 * videopoker = (Videopoker)os.readObject(); os.close();
- +			 */
+ 			 * ObjectInputStream os = new ObjectInputStream(fs);
+ 			 *
+ 			 * videopoker = (Videopoker)os.readObject(); os.close();
+ 		  */
  			videopoker.readData(s);
  			nrOfSwaps = s.readInt();
  			swapCount = s.readInt();
@@ -560,7 +557,7 @@ import javax.swing.JTextField;
  			}
 
  			moneyLeft.setText(s.readUTF());
-=======
+
 public class Gui extends JFrame implements ActionListener {
 
 	// Skapa massa variabler som behövs
@@ -578,7 +575,7 @@ public class Gui extends JFrame implements ActionListener {
 	private JButton hold = new JButton("Call");
 
 	private JRadioButton[] radiobuttons = new JRadioButton[] { new JRadioButton(" 1 swap ", true),
-			new JRadioButton(" 2 swaps", false) };
+	new JRadioButton(" 2 swaps", false) };
 	private ButtonGroup group = new ButtonGroup();
 
 	private JPanel checkboxPanel = new JPanel();
@@ -588,7 +585,7 @@ public class Gui extends JFrame implements ActionListener {
 	private static JTextArea textMessageArea = new JTextArea(2, 20);
 	private static JTextArea moneyLeft = new JTextArea("0", 1, 4);
 	private JComponent[] textAreas = new JTextArea[] { new JTextArea("money left:", 1, 10),
-			new JTextArea("bet:", 1, 4) };
+	new JTextArea("bet:", 1, 4) };
 	private static JTextField betField = new JTextField(4);
 	private JButton[] saveAndLoad = new JButton[] { new JButton("SAVE"), new JButton("LOAD") };
 
@@ -597,7 +594,7 @@ public class Gui extends JFrame implements ActionListener {
 	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
 			new JLabel() };
 
-<<<<<<< Updated upstream
+
 	private Color sassyColor = Color.LIGHT_GRAY; // new Color(55, 9, 84);
 
 	// sökvägar för kortikonerna
@@ -634,7 +631,7 @@ public class Gui extends JFrame implements ActionListener {
 			new ImageIcon("src/images/8_of_hearts.png"), new ImageIcon("src/images/9_of_hearts.png"),
 			new ImageIcon("src/images/10_of_hearts.png"), new ImageIcon("src/images/knight_of_hearts.png"),
 			new ImageIcon("src/images/queen_of_hearts.png"), new ImageIcon("src/images/king_of_hearts.png") };
-=======
+
 	private Color sassyColor = new Color(55, 9, 84);
 
 	// sökvägar för kortikonerna
@@ -644,7 +641,7 @@ public class Gui extends JFrame implements ActionListener {
 	private static ImageIcon[] clubCards;
 	private static ImageIcon[] diamondCards;
 	private static ImageIcon[] heartCards;
->>>>>>> Stashed changes
+
 
 	// konstruktor
 	public Gui() {
@@ -1088,7 +1085,6 @@ public class Gui extends JFrame implements ActionListener {
 			}
 
 			moneyLeft.setText(s.readUTF());
->>>>>>> Stashed changes
 			betField.setText(s.readUTF());
  			s.close();
 
