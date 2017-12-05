@@ -10,6 +10,8 @@ public class Gui extends JFrame implements ActionListener {
 	// Skapa massa variabler som behövs
 	Videopoker videopoker = new Videopoker(1);
 
+	private boolean gameOn = false;
+
 	public int nrOfSwaps = 1;
 	public int swapCount = 0;
 	public static int lastbet = 0;
@@ -38,8 +40,8 @@ public class Gui extends JFrame implements ActionListener {
 
 	private static JLabel[] cards = new JLabel[] { new JLabel(), new JLabel(), new JLabel(), new JLabel(),
 			new JLabel() };
-	
-	private Color sassyColor = Color.LIGHT_GRAY; //new Color(55, 9, 84); 
+
+	private Color sassyColor = Color.LIGHT_GRAY; // new Color(55, 9, 84);
 
 	// sökvägar för kortikonerna
 	private ImageIcon back = new ImageIcon("src/images/back.png");
@@ -238,7 +240,7 @@ public class Gui extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == start) {
-			// TODO: lägg in anrop till startmetoden här
+			gameOn = true;
 			videopoker.setBet();
 			if (videopoker.getInmatning() > 0) {
 				betField.setText("");
@@ -256,7 +258,6 @@ public class Gui extends JFrame implements ActionListener {
 			}
 
 		} else if (e.getSource() == swap) {
-			// TODO: lägg in anrop till swapmetoden här
 			boolean[] mask = new boolean[] { c[0].isSelected(), c[1].isSelected(), c[2].isSelected(), c[3].isSelected(),
 					c[4].isSelected(), };
 			videopoker.swapCards(mask);
@@ -265,7 +266,7 @@ public class Gui extends JFrame implements ActionListener {
 			checkNrOfSwaps();
 
 		} else if (e.getSource() == hold) {
-			// TODO: lägg in anrop till holdmetoden här
+			gameOn = false;
 			start.setEnabled(true);
 			hold.setEnabled(false);
 			swap.setEnabled(false);
@@ -280,7 +281,11 @@ public class Gui extends JFrame implements ActionListener {
 			save();
 		} else if (e.getSource() == saveAndLoad[1]) {
 			load();
-			setIconsForHand(videopoker.getHand(0));
+			if (gameOn == true) {
+				setIconsForHand(videopoker.getHand(0));
+			} else {
+				resetCardIcons();
+			}
 			checkNrOfSwaps();
 		}
 		// tar hand om inmatningarna i betfield
@@ -335,7 +340,8 @@ public class Gui extends JFrame implements ActionListener {
 				return 0;
 				// return lastbet;
 			}
-		} return 0;
+		}
+		return 0;
 	}
 
 	private void setIconsForHand(Hand hand) {
@@ -414,6 +420,9 @@ public class Gui extends JFrame implements ActionListener {
 			s.writeBoolean(swap.isEnabled());
 			s.writeBoolean(hold.isEnabled());
 
+			// Sebastians test
+			s.writeBoolean(gameOn);
+
 			s.writeBoolean(radiobuttons[0].isEnabled());
 			s.writeBoolean(radiobuttons[1].isEnabled());
 			for (int i = 0; i < 5; ++i) {
@@ -446,6 +455,9 @@ public class Gui extends JFrame implements ActionListener {
 			swap.setEnabled(s.readBoolean());
 			hold.setEnabled(s.readBoolean());
 
+			// Sebastians test
+			gameOn = s.readBoolean();
+
 			radiobuttons[0].setEnabled(s.readBoolean());
 			radiobuttons[1].setEnabled(s.readBoolean());
 			for (int i = 0; i < 5; ++i) {
@@ -455,6 +467,7 @@ public class Gui extends JFrame implements ActionListener {
 			moneyLeft.setText(s.readUTF());
 			betField.setText(s.readUTF());
 			s.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
