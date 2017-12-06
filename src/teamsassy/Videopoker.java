@@ -1,9 +1,11 @@
 
 package teamsassy;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
-import java.util.List;
 
 public class Videopoker implements Serializable {
     // Game data.
