@@ -67,7 +67,7 @@ import javax.swing.JTextField;
  			new JLabel() };
 
 
- 		private Color sassyColor = Color.LIGHT_GRAY; // new Color(55, 9, 84);
+ 		private Color sassyColor = new Color(172, 77, 196);
 
  	// sökvägar för kortikonerna
  		private ImageIcon back;
