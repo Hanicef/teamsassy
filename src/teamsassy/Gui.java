@@ -169,6 +169,8 @@ import javax.swing.JTextField;
  		buttonPanel.add(radiobuttons[1], buttonPanelGBC);
  		group.add(radiobuttons[0]);
  		group.add(radiobuttons[1]);
+ 		radiobuttons[0].setOpaque(false);
+ 		radiobuttons[1].setOpaque(false);
  		radiobuttons[0].addActionListener(this);
  		radiobuttons[1].addActionListener(this);
 
@@ -184,6 +186,7 @@ import javax.swing.JTextField;
  			checkboxPanel.add(c[i], checkboxPanelGBC);
  			c[i].addActionListener(this);
  			c[i].setEnabled(false);
+ 			c[i].setOpaque(false);
  		}
 
  		// Ställ in och lägg till textAreas + load/save button
