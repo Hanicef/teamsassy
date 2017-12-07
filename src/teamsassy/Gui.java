@@ -120,7 +120,7 @@ import javax.swing.JTextField;
  				new ImageIcon(getClass().getResource("images/knight_of_diamonds.png")),
  				new ImageIcon(getClass().getResource("images/queen_of_diamonds.png")),
  				new ImageIcon(getClass().getResource("images/king_of_diamonds.png")) };
- 		heartCards = new ImageIcon[] { new ImageIcon(getClass().getResource("images/ace_of_Hearts.png")),
+ 		heartCards = new ImageIcon[] { new ImageIcon(getClass().getResource("images/ace_of_hearts.png")),
  				new ImageIcon(getClass().getResource("images/2_of_hearts.png")),
  				new ImageIcon(getClass().getResource("images/3_of_hearts.png")),
 				new ImageIcon(getClass().getResource("images/4_of_hearts.png")),
